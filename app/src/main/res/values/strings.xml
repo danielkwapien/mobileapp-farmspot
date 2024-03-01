@@ -3,7 +3,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="hello">Hello!</string>
     <string name="username">User</string>
     <string name="password">Password</string>
-    <string name="signup_help">Don\'t have an account? Signup</string>
+    <string name="login">Log In</string>
+    <string name="signup">Sign Up</string>
+    <string name="signup_help">Don\'t have an account? Sign Up</string>
 </resources>
