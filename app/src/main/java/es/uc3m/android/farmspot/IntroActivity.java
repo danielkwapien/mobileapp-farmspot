@@ -39,13 +39,18 @@ public class IntroActivity extends AppCompatActivity {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openLoginActivity();
+                openRegisterActivity();
             }
         });
     }
 
     public void openLoginActivity(){
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    public void openRegisterActivity(){
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 }

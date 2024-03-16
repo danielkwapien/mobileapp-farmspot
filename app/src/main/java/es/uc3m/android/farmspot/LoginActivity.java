@@ -2,6 +2,7 @@ package es.uc3m.android.farmspot;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Objects;
@@ -17,6 +19,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     Button loginButton;
+
+    TextView loginTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +30,10 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
+        username = findViewById(R.id.loginUsername);
+        password = findViewById(R.id.loginPassword);
         loginButton = findViewById(R.id.loginButton);
+        loginTextView = findViewById(R.id.loginTextView);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,5 +46,17 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        loginTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openRegisterActivity();
+            }
+        });
+    }
+
+    public void openRegisterActivity(){
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 }
