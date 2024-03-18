@@ -41,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (username.getText().toString().trim().equals("user") && password.getText().toString().trim().equals("1234")){
                     Toast.makeText(RegisterActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                    openMainActivity();
                 }
                 else{
                     Toast.makeText(RegisterActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
@@ -58,6 +59,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void openLoginActivity(){
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    public void openMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 }
