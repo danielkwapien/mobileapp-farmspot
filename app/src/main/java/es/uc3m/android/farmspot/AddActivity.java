@@ -6,15 +6,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.Objects;
 
 public class AddActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
         setContentView(R.layout.activity_add);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
@@ -34,6 +42,11 @@ public class AddActivity extends AppCompatActivity {
                     return true;
                 }
                 else if (item.getItemId() == R.id.navigation_add){
+                    return true;
+                }
+                else if (item.getItemId() == R.id.navigation_add){
+                    startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
+                    finish();
                     return true;
                 }
                 return false;

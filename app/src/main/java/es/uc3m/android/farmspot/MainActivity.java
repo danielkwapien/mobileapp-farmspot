@@ -3,6 +3,8 @@ package es.uc3m.android.farmspot;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -14,6 +16,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.Objects;
+
 import es.uc3m.android.farmspot.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
         setContentView(R.layout.activity_main);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
@@ -43,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else if (item.getItemId() == R.id.navigation_add){
                     startActivity(new Intent(getApplicationContext(), AddActivity.class));
+                    finish();
+                    return true;
+                }
+                else if (item.getItemId() == R.id.navigation_add){
+                    startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
                     finish();
                     return true;
                 }
