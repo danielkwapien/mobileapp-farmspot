@@ -35,8 +35,14 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.navigation_home){
                     return true;
-                } else if (item.getItemId() == R.id.navigation_search){
+                }
+                else if (item.getItemId() == R.id.navigation_search){
                     startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                    finish();
+                    return true;
+                }
+                else if (item.getItemId() == R.id.navigation_add){
+                    startActivity(new Intent(getApplicationContext(), AddActivity.class));
                     finish();
                     return true;
                 }

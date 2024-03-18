@@ -11,4 +11,19 @@
         android:icon="@drawable/baseline_search_24"
         android:title="@string/title_search" />
 
+    <item
+        android:id="@+id/navigation_add"
+        android:icon="@drawable/baseline_add_circle_24"
+        android:title="@string/title_add" />
+
+    <item
+        android:id="@+id/navigation_favorites"
+        android:icon="@drawable/baseline_bookmarks_24"
+        android:title="@string/title_favorites"/>
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:title="@string/title_profile" />
+
 </menu>

@@ -4,6 +4,11 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_search">Search</string>
+    <string name="title_inbox">Inbox</string>
+    <string name="title_add">Add</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_profile">Profile</string>
+
     <string name="hello">Hello!</string>
     <string name="username">User</string>
     <string name="password">Password</string>

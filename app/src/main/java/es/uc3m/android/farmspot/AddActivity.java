@@ -10,15 +10,15 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class SearchActivity extends AppCompatActivity {
+public class AddActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_add);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
-        bottomNavigationView.setSelectedItemId(R.id.navigation_search);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_add);
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -29,11 +29,11 @@ public class SearchActivity extends AppCompatActivity {
                     return true;
                 }
                 else if (item.getItemId() == R.id.navigation_search){
+                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                    finish();
                     return true;
                 }
                 else if (item.getItemId() == R.id.navigation_add){
-                    startActivity(new Intent(getApplicationContext(), AddActivity.class));
-                    finish();
                     return true;
                 }
                 return false;
