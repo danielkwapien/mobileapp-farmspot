@@ -14,7 +14,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Objects;
 
-public class FavoritesActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +23,10 @@ public class FavoritesActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        setContentView(R.layout.activity_favorites);
+        setContentView(R.layout.activity_profile);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
-        bottomNavigationView.setSelectedItemId(R.id.navigation_favorites);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_profile);
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -47,11 +47,11 @@ public class FavoritesActivity extends AppCompatActivity {
                     return true;
                 }
                 else if (item.getItemId() == R.id.navigation_favorites){
+                    startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
+                    finish();
                     return true;
                 }
-                else if (item.getItemId() == R.id.navigation_profile){
-                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                    finish();
+                else if (item.getItemId() == R.id.navigation_favorites){
                     return true;
                 }
                 return false;

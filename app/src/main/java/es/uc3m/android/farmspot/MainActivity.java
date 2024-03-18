@@ -54,8 +54,13 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                     return true;
                 }
-                else if (item.getItemId() == R.id.navigation_add){
+                else if (item.getItemId() == R.id.navigation_favorites){
                     startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
+                    finish();
+                    return true;
+                }
+                else if (item.getItemId() == R.id.navigation_profile){
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     finish();
                     return true;
                 }
