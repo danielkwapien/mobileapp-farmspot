@@ -17,7 +17,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     private LayoutInflater inflater;
     private Context context;
 
-    public HomeRecyclerViewAdapter(List<String> itemList, Context context) {
+    public HomeRecyclerViewAdapter(List<HomeCardElement> itemList, Context context) {
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.data = itemList;

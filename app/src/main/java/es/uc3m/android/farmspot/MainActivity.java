@@ -76,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private List<String> generateData() {
-        List<String> data = new ArrayList<>();
-        data.add(String.valueOf(new HomeCardElement("Card 1", "Description 1")));
-        data.add(String.valueOf(new HomeCardElement("Card 2", "Description 2")));
-        data.add(String.valueOf(new HomeCardElement("Card 3", "Description 3")));
-        data.add(String.valueOf(new HomeCardElement("Card 4", "Description 4")));
-        data.add(String.valueOf(new HomeCardElement("Card 5", "Description 5")));
+    private List<HomeCardElement> generateData() {
+        List<HomeCardElement> data = new ArrayList<>();
+        data.add(new HomeCardElement("Card 1", "Description 1"));
+        data.add(new HomeCardElement("Card 2", "Description 2"));
+        data.add(new HomeCardElement("Card 3", "Description 3"));
+        data.add(new HomeCardElement("Card 4", "Description 4"));
+        data.add(new HomeCardElement("Card 5", "Description 5"));
         return data;
     }
 
