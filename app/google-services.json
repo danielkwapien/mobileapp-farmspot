@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:959074822458:android:6a1a83e77bbd71b39b4803",
+        "mobilesdk_app_id": "1:959074822458:android:32e9fc12f884a1269b4803",
         "android_client_info": {
-          "package_name": "es.uc3m.android.firebase"
+          "package_name": "es.uc3m.android.farmspot"
         }
       },
       "oauth_client": [],
