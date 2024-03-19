@@ -34,8 +34,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new HomeRecyclerViewAdapter(generateData()));
+        recyclerView.setAdapter(new HomeRecyclerViewAdapter(generateData(), this));
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
@@ -77,10 +78,11 @@ public class MainActivity extends AppCompatActivity {
 
     private List<String> generateData() {
         List<String> data = new ArrayList<>();
-        String listText = getResources().getString(R.string.list_text);
-        for (int i = 0; i < 20; i++) {
-            data.add(listText + " " + i);
-        }
+        data.add(String.valueOf(new HomeCardElement("Card 1", "Description 1")));
+        data.add(String.valueOf(new HomeCardElement("Card 2", "Description 2")));
+        data.add(String.valueOf(new HomeCardElement("Card 3", "Description 3")));
+        data.add(String.valueOf(new HomeCardElement("Card 4", "Description 4")));
+        data.add(String.valueOf(new HomeCardElement("Card 5", "Description 5")));
         return data;
     }
 

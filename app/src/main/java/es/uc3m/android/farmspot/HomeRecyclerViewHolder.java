@@ -1,6 +1,7 @@
 package es.uc3m.android.farmspot;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,21 +11,20 @@ import java.util.List;
 public class HomeRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     public final HomeRecyclerViewAdapter parent;
-    public static List<String> data;
-    public final TextView textView;
+    public final ImageView image;
+    public final TextView title, description;
 
-    public HomeRecyclerViewHolder(HomeRecyclerViewAdapter parent, List<String> data, View view) {
+    public HomeRecyclerViewHolder(HomeRecyclerViewAdapter parent, View view) {
         super(view);
-        this.textView = view.findViewById(R.id.textview);
+        this.image = view.findViewById(R.id.homeCardImage);
+        this.title = view.findViewById(R.id.cardTitle);
+        this.description = view.findViewById(R.id.cardDescription);
         this.parent = parent;
-        this.data = data;
+    }
 
-        view.setOnClickListener(view1 -> {
-            int position = getLayoutPosition();
-            data.remove(position);
-            parent.notifyDataSetChanged();
-        });
-
+    void bindData(final HomeCardElement item) {
+        title.setText(item.getTitle());
+        description.setText(item.getDescription());
     }
 
 }
