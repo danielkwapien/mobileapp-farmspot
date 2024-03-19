@@ -19,5 +19,12 @@
     <string name="signupHelp">Already have an account? Log In</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- SUPPORT PAGE -->
+    <string name="title_contact_us"> Contact Us</string>
+    <string name="email"> <b>Email:</b> farmsport@gmail.com</string>
+    <string name="phone"> <b>Phone:</b> 655837464</string>
+    <string name="instagram"> <b>Instagram: </b> farmspot</string>
+    <string name="twitter"> <b>Twitter: </b> farmspotX</string>
+    <string name="address"> <b>Address:</b> Leganés, Madrid</string>
 
 </resources>
