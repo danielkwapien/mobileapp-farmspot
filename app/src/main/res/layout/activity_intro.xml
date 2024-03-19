@@ -39,7 +39,7 @@
                 android:layout_marginHorizontal="100dp"
                 android:backgroundTint="@color/green_main"
                 android:text="@string/signup"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:fontFamily="@font/nunito_extrabold"
                 app:cornerRadius="30dp" />
 
@@ -52,7 +52,7 @@
                 android:backgroundTint="@color/white"
                 android:text="@string/login"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:fontFamily="@font/nunito_extrabold"
                 app:cornerRadius="30dp"
                 tools:strokeWidth="1dp" />
