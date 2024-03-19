@@ -41,70 +41,75 @@
         android:id="@+id/textViewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/email"
-        android:textSize="17sp"
-        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:text="@string/email"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
 
     <TextView
         android:id="@+id/textViewPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/phone"
-        android:textSize="17sp"
-        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewEmail"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:text="@string/phone"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewEmail" />
 
     <TextView
         android:id="@+id/textViewInstagram"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/instagram"
-        android:textSize="17sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="48dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        android:text="@string/instagram"
         android:textColor="@color/black"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewPhone"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPhone" />
 
     <TextView
         android:id="@+id/textViewTwitter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/twitter"
-        android:textSize="17sp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textColor="@color/black"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewInstagram"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="@string/twitter"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewInstagram" />
 
     <TextView
-        android:id="@+id/textViewAdress"
+        android:id="@+id/textViewAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/address"
-        android:textSize="17sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        android:text="@string/address"
         android:textColor="@color/black"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/textViewTwitter"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTwitter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
