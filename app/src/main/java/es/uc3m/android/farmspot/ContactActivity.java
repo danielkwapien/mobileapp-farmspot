@@ -1,3 +1,5 @@
+package es.uc3m.android.farmspot;
+
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -15,7 +15,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import es.uc3m.android.farmspot.databinding.ActivityMainBinding;
@@ -32,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         setContentView(R.layout.activity_main);
+
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new HomeViewAdapter(generateData()));
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
@@ -69,6 +77,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private List<String> generateData() {
+        List<String> data = new ArrayList<>();
+        String listText = getResources().getString(R.string.list_text);
+        for (int i = 0; i < 20; i++) {
+            data.add(listText + " " + i);
+        }
+        return data;
     }
 
 }
