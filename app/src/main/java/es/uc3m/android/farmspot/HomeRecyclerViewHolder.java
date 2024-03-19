@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class HomeViewHolder extends RecyclerView.ViewHolder {
+public class HomeRecyclerViewHolder extends RecyclerView.ViewHolder {
 
-    public final HomeViewAdapter parent;
+    public final HomeRecyclerViewAdapter parent;
     public static List<String> data;
     public final TextView textView;
 
-    public HomeViewHolder(HomeViewAdapter parent, List<String> data, View view) {
+    public HomeRecyclerViewHolder(HomeRecyclerViewAdapter parent, List<String> data, View view) {
         super(view);
         this.textView = view.findViewById(R.id.textview);
         this.parent = parent;

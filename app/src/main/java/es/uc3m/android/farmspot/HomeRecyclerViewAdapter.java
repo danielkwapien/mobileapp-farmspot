@@ -8,22 +8,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class HomeViewAdapter extends RecyclerView.Adapter<HomeViewHolder> {
+public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewHolder> {
     private static List<String> data;
 
-    public HomeViewAdapter(List<String> data) {
+    public HomeRecyclerViewAdapter(List<String> data) {
         this.data = data;
     }
 
     @Override
-    public HomeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HomeRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_view, parent, false);
-        return new HomeViewHolder(this, data, rowItem);
+        return new HomeRecyclerViewHolder(this, data, rowItem);
     }
 
     @Override
-    public void onBindViewHolder(HomeViewHolder holder, int position) {
+    public void onBindViewHolder(HomeRecyclerViewHolder holder, int position) {
         holder.textView.setText(data.get(position));
     }
 
