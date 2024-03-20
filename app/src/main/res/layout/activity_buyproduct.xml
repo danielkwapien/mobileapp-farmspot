@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,35 +9,57 @@
 
     <!-- Back icon -->
 
+
+    <ImageView
+        android:id="@+id/backIcon"
+        android:layout_width="47dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/backicon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="398dp"
+        android:layout_height="184dp"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/logo_black_farmspot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backIcon" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/addressCardView"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/specificationCardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="248dp"
         tools:ignore="MissingConstraints">
 
         <RadioGroup
             android:id="@+id/addressRadioGroup"
             android:layout_width="349dp"
             android:layout_height="77dp"
+            android:onClick="onRadioButtonClicked"
             android:orientation="vertical">
 
             <RadioButton
                 android:id="@+id/defaultAddressRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your default address" />
+                android:text="@string/defaultaddress" />
 
             <RadioButton
                 android:id="@+id/specifyAddressRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Specify your address" />
+                android:text="@string/specifyaddress" />
 
         </RadioGroup>
 
@@ -46,13 +69,15 @@
         android:id="@+id/quantityCardView"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="12dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toTopOf="@+id/addressCardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.39"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backIcon"
+        app:layout_constraintVertical_bias="0.835">
 
         <EditText
             android:id="@+id/quantityEditText"
@@ -69,47 +94,61 @@
         android:id="@+id/specificationCardView"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="52dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/addressCardView"
+        app:layout_constraintBottom_toTopOf="@+id/AddProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toStartOf="parent">
 
-    <EditText
-        android:id="@+id/AdditionalSpecification"
-        android:layout_width="347dp"
-        android:layout_height="88dp"
-        android:layout_marginTop="92dp"
-        android:hint="@string/additional_specification"
-        android:padding="8dp"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/addressCardView"
-        tools:layout_editor_absoluteX="16dp" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        <EditText
+            android:id="@+id/AdditionalSpecification"
+            android:layout_width="347dp"
+            android:layout_height="88dp"
+            android:layout_marginTop="92dp"
+            android:hint="@string/additional_specification"
+            android:padding="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/addressCardView"
+            tools:layout_editor_absoluteX="16dp" />
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/AddProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="108dp"
         android:text="@string/add_product_button"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-    </androidx.cardview.widget.CardView>
+
+    <EditText
+        android:id="@+id/addressEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addressCardView"
+        android:visibility="gone" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AddProduct"
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
