@@ -36,5 +36,7 @@
     <string name="CategoryProduct">Category</string>
     <string name="PricePerUnit">Price per Unit in Euros</string>
     <string name="UnitProduct">Units</string>
+    <string name="Quantity">Quantity</string>
+    <string name="additional_specification">Add any additional specification</string>
 
 </resources>
