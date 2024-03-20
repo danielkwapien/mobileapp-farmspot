@@ -31,14 +31,14 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/addressCardView"
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_width="384dp"
+        android:layout_height="82dp"
+        android:layout_marginBottom="20dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toTopOf="@+id/specificationCardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.292"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints">
 
@@ -67,17 +67,17 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/quantityCardView"
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
+        android:layout_width="388dp"
+        android:layout_height="41dp"
         android:layout_marginBottom="12dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toTopOf="@+id/addressCardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintHorizontal_bias="0.195"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backIcon"
-        app:layout_constraintVertical_bias="0.835">
+        app:layout_constraintVertical_bias="1.0">
 
         <EditText
             android:id="@+id/quantityEditText"
@@ -92,12 +92,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/specificationCardView"
-        android:layout_width="370dp"
-        android:layout_height="wrap_content"
+        android:layout_width="381dp"
+        android:layout_height="181dp"
         android:layout_marginBottom="52dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/AddProduct"
+        app:layout_constraintBottom_toTopOf="@+id/BuyProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.39"
         app:layout_constraintStart_toStartOf="parent">
@@ -116,11 +116,11 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/AddProduct"
+        android:id="@+id/BuyProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="108dp"
-        android:text="@string/add_product_button"
+        android:text="@string/buyproduct"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -147,7 +147,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AddProduct"
+        app:layout_constraintTop_toBottomOf="@+id/BuyProduct"
         app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_nav_menu" />
 
