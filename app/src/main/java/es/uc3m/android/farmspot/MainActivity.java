@@ -78,11 +78,10 @@ public class MainActivity extends AppCompatActivity {
 
     private List<HomeCardElement> generateData() {
         List<HomeCardElement> data = new ArrayList<>();
-        data.add(new HomeCardElement("Card 1", "Description 1"));
-        data.add(new HomeCardElement("Card 2", "Description 2"));
-        data.add(new HomeCardElement("Card 3", "Description 3"));
-        data.add(new HomeCardElement("Card 4", "Description 4"));
-        data.add(new HomeCardElement("Card 5", "Description 5"));
+        data.add(new HomeCardElement("White potato", "0,94 €/kg", "Chinchón, Madrid", "Vegetables, Potato"));
+        data.add(new HomeCardElement("Galician blonde cow", "1.500 €/unit", "Abeledo, A Coruña", "Animal, Cow"));
+        data.add(new HomeCardElement("Hard red wheat", "0,37 €/kg", "Villacastín, Segovia", "Cereal, Wheat"));
+        data.add(new HomeCardElement("Apple tree seeds", "0,39 €/g", "Navaluenga, Ávila", "Seed, fruit"));
         return data;
     }
 
