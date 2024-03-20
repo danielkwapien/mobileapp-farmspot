@@ -29,7 +29,7 @@
         android:layout_marginTop="28dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/AddPictureProduct"
+        android:src="@drawable/add_picture_product"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backIcon" />
 
@@ -41,7 +41,7 @@
         android:layout_marginEnd="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/AddPictureProduct"
+        android:src="@drawable/add_picture_product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backIcon" />
 
@@ -52,7 +52,7 @@
         android:layout_marginTop="28dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/AddPictureProduct"
+        android:src="@drawable/add_picture_product"
         app:layout_constraintEnd_toStartOf="@+id/imageproduct3"
         app:layout_constraintHorizontal_bias="0.59"
         app:layout_constraintStart_toEndOf="@+id/imageproduct1"
@@ -66,7 +66,7 @@
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/AddPictureProduct"
+        android:src="@drawable/add_picture_product"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageproduct1" />
 
@@ -77,7 +77,7 @@
         android:layout_marginTop="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/AddPictureProduct"
+        android:src="@drawable/add_picture_product"
         app:layout_constraintEnd_toStartOf="@+id/imageproduct6"
         app:layout_constraintStart_toEndOf="@+id/imageproduct4"
         app:layout_constraintTop_toBottomOf="@+id/imageproduct2" />
@@ -90,7 +90,7 @@
         android:layout_marginEnd="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/AddPictureProduct"
+        android:src="@drawable/add_picture_product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageproduct3" />
 
