@@ -29,5 +29,7 @@
     <string name="instagram"> <b>Instagram: </b> farmspot</string>
     <string name="twitter"> <b>Twitter: </b> farmspotX</string>
     <string name="address"> <b>Address:</b> Leganés, Madrid</string>
+    <!-- ADD PRODUCT  -->
+    <string name="add_product_button">Add Product</string>
 
 </resources>
