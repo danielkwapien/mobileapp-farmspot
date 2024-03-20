@@ -1,14 +1,18 @@
 package es.uc3m.android.farmspot;
 
 public class HomeCardElement {
+
     public String title;
-    public String description;
+    public String price;
+    public String location;
+    public String category;
 
-    public HomeCardElement(String title, String description) {
+    public HomeCardElement(String title, String price, String location, String category) {
         this.title = title;
-        this.description = description;
+        this.price = price;
+        this.location = location;
+        this.category = category;
     }
-
 
     public String getTitle() {
         return title;
@@ -18,11 +22,28 @@ public class HomeCardElement {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getPrice() {
+        return price;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPrice(String price) {
+        this.price = price;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 }
