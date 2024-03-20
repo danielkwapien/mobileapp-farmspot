@@ -48,9 +48,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageproduct1" />
 
-
     <ImageView
         android:id="@+id/imageproduct5"
+        android:layout_width="109dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/AddPictureProduct"
+        app:layout_constraintEnd_toStartOf="@+id/imageproduct6"
+        app:layout_constraintStart_toEndOf="@+id/imageproduct4"
+        app:layout_constraintTop_toBottomOf="@+id/imageproduct2" />
+
+    <ImageView
+        android:id="@+id/imageproduct6"
         android:layout_width="109dp"
         android:layout_height="74dp"
         android:layout_marginTop="16dp"
@@ -59,15 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageproduct3" />
 
-    <ImageView
-        android:id="@+id/imageproduct6"
-        android:layout_width="109dp"
-        android:layout_height="74dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/AddPictureProduct"
-        app:layout_constraintEnd_toStartOf="@+id/imageproduct5"
-        app:layout_constraintStart_toEndOf="@+id/imageproduct4"
-        app:layout_constraintTop_toBottomOf="@+id/imageproduct2" />
+    
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
