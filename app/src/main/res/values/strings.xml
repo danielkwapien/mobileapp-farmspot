@@ -41,5 +41,6 @@
     <!-- BUY PRODUCT -->
     <string name="defaultaddress">Your default address</string>
     <string name="specifyaddress">Specify an address</string>
+    <string name="buyproduct">Buy Product</string>
 
 </resources>
