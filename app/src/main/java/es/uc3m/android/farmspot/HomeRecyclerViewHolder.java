@@ -12,19 +12,23 @@ public class HomeRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     public final HomeRecyclerViewAdapter parent;
     public final ImageView image;
-    public final TextView title, description;
+    public final TextView title, price, location, category;
 
     public HomeRecyclerViewHolder(HomeRecyclerViewAdapter parent, View view) {
         super(view);
         this.image = view.findViewById(R.id.homeCardImage);
         this.title = view.findViewById(R.id.cardTitle);
-        this.description = view.findViewById(R.id.cardDescription);
+        this.price = view.findViewById(R.id.cardPrice);
+        this.location = view.findViewById(R.id.cardLocation);
+        this.category = view.findViewById(R.id.cardCategory);
         this.parent = parent;
     }
 
     void bindData(final HomeCardElement item) {
         title.setText(item.getTitle());
-        description.setText(item.getDescription());
+        price.setText(item.getPrice());
+        location.setText(item.getLocation());
+        category.setText(item.getCategory());
     }
 
 }
