@@ -27,9 +27,9 @@
         android:layout_height="74dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="28dp"
-        android:src="@drawable/AddPictureProduct"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/AddPictureProduct"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backIcon" />
 
@@ -39,9 +39,9 @@
         android:layout_height="74dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/AddPictureProduct"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/AddPictureProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backIcon" />
 
@@ -50,9 +50,9 @@
         android:layout_width="109dp"
         android:layout_height="74dp"
         android:layout_marginTop="28dp"
-        android:src="@drawable/AddPictureProduct"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/AddPictureProduct"
         app:layout_constraintEnd_toStartOf="@+id/imageproduct3"
         app:layout_constraintHorizontal_bias="0.59"
         app:layout_constraintStart_toEndOf="@+id/imageproduct1"
@@ -64,9 +64,9 @@
         android:layout_height="74dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/AddPictureProduct"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/AddPictureProduct"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageproduct1" />
 
@@ -75,9 +75,9 @@
         android:layout_width="109dp"
         android:layout_height="74dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/AddPictureProduct"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/AddPictureProduct"
         app:layout_constraintEnd_toStartOf="@+id/imageproduct6"
         app:layout_constraintStart_toEndOf="@+id/imageproduct4"
         app:layout_constraintTop_toBottomOf="@+id/imageproduct2" />
@@ -88,12 +88,120 @@
         android:layout_height="74dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/AddPictureProduct"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/AddPictureProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageproduct3" />
 
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/titleCardView"
+        android:layout_width="377dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="28dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageproduct5">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/TitleProduct"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/descriptionCardView"
+        android:layout_width="370dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="24dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/categoryCardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleCardView"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/DescriptionProduct"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/categoryCardView"
+        android:layout_width="374dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="32dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/priceCardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/categoryTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/CategoryProduct"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/priceCardView"
+        android:layout_width="207dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="20dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="558dp">
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/PricePerUnit"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/unitCardView"
+        android:layout_width="134dp"
+        android:layout_height="41dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/priceCardView"
+        tools:layout_editor_absoluteY="554dp">
+
+        <TextView
+            android:id="@+id/unitTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/UnitProduct"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -111,10 +219,12 @@
         android:id="@+id/AddProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="12dp"
         android:text="@string/add_product_button"
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceCardView"
+        app:layout_constraintVertical_bias="0.916" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
