@@ -26,7 +26,7 @@
         android:layout_width="109dp"
         android:layout_height="74dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="10dp"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/add_picture_product"
@@ -37,7 +37,7 @@
         android:id="@+id/imageproduct3"
         android:layout_width="109dp"
         android:layout_height="74dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:clickable="true"
         android:focusable="true"
@@ -49,7 +49,7 @@
         android:id="@+id/imageproduct2"
         android:layout_width="109dp"
         android:layout_height="74dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="10dp"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/add_picture_product"
@@ -63,7 +63,7 @@
         android:layout_width="109dp"
         android:layout_height="74dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/add_picture_product"
@@ -74,7 +74,7 @@
         android:id="@+id/imageproduct5"
         android:layout_width="109dp"
         android:layout_height="74dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/add_picture_product"
@@ -86,7 +86,7 @@
         android:id="@+id/imageproduct6"
         android:layout_width="109dp"
         android:layout_height="74dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:clickable="true"
         android:focusable="true"
@@ -97,23 +97,24 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/titleCardView"
-        android:layout_width="377dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="10dp"
         app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageproduct5">
 
         <EditText
             android:id="@+id/titleAddProduct"
-            android:layout_width="325dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:padding="8dp"
             android:hint="@string/TitleProduct"
             android:textColor="@android:color/black"
+            android:background="@drawable/custom_eddittext"
             android:textSize="16sp" />
 
     </androidx.cardview.widget.CardView>
@@ -121,11 +122,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/descriptionCardView"
-        android:layout_width="370dp"
-        android:layout_height="115dp"
-        android:layout_marginTop="24dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toTopOf="@+id/categoryCardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"
@@ -140,6 +142,7 @@
             android:padding="8dp"
             android:hint="@string/DescriptionProduct"
             android:textColor="@android:color/black"
+            android:background="@drawable/custom_eddittext"
             android:textSize="16sp" />
 
     </androidx.cardview.widget.CardView>
@@ -147,12 +150,13 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/categoryCardView"
-        android:layout_width="374dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="32dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/priceCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginHorizontal="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/priceUnitLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent">
@@ -163,58 +167,78 @@
             android:layout_height="match_parent"
             android:padding="8dp"
             android:hint= "@string/CategoryProduct"
+            android:background="@drawable/custom_eddittext"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
     </androidx.cardview.widget.CardView>
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/priceCardView"
-        android:layout_width="207dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/AddProduct"
-        app:layout_constraintStart_toStartOf="parent">
+    <LinearLayout
+        android:id="@+id/priceUnitLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintStart_toStartOf="@id/descriptionCardView"
+        app:layout_constraintBottom_toTopOf="@+id/AddProduct">
 
-        <EditText
-            android:id="@+id/priceEditText"
-            android:layout_width="184dp"
-            android:layout_height="match_parent"
-            android:padding="8dp"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:hint= "@string/PricePerUnit"/>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/priceCardView"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
 
-    </androidx.cardview.widget.CardView>
+            <EditText
+                android:id="@+id/priceEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:textColor="@android:color/black"
+                android:background="@drawable/custom_eddittext"
+                android:textSize="16sp"
+                android:hint= "@string/PricePerUnit"/>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/unitCardView"
-        android:layout_width="134dp"
-        android:layout_height="41dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/AddProduct"
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/unitCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginHorizontal="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <EditText
+                android:id="@+id/unitEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:hint= "@string/UnitProduct"
+                android:textColor="@android:color/black"
+                android:background="@drawable/custom_eddittext"
+                android:textSize="16sp" />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/AddProduct"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/add_product_button"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.66"
-        app:layout_constraintStart_toEndOf="@+id/priceCardView"
-        app:layout_constraintTop_toBottomOf="@+id/categoryCardView"
-        app:layout_constraintVertical_bias="0.933">
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/green_main"
+        android:textSize="16dp"
+        app:cornerRadius="30dp"/>
 
-        <EditText
-            android:id="@+id/unitEditText"
-            android:layout_width="105dp"
-            android:layout_height="match_parent"
-            android:padding="8dp"
-            android:hint= "@string/UnitProduct"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
-
-    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -227,15 +251,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
-
-    <Button
-        android:id="@+id/AddProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="@string/add_product_button"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
