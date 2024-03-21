@@ -91,11 +91,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
     @Override
     public void onItemClick(HomeCardElement item) {
         Intent intent = new Intent(this, BuyActivity.class);
-        intent.putExtra("title", item.getTitle());
-        intent.putExtra("price", item.getPrice());
-        intent.putExtra("location", item.getLocation());
-        intent.putExtra("category", item.getCategory());
-        intent.putExtra("image", item.getImage());
+        intent.putExtra("data", item);
         startActivity(intent);
     }
 
