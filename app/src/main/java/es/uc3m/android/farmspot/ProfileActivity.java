@@ -2,6 +2,7 @@ package es.uc3m.android.farmspot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import java.util.Objects;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    private CardView cardView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,14 @@ public class ProfileActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         setContentView(R.layout.activity_profile);
+
+        cardView = findViewById(R.id.profileHelp);
+
+        cardView.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), SupportActivity.class));
+            finish();
+        });
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_profile);

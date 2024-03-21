@@ -63,6 +63,7 @@
             android:textSize="18sp"/>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/profileHelp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -71,7 +72,6 @@
             app:cardElevation="5dp">
 
             <TextView
-                android:id="@+id/profileCustomerSupport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="10dp"
