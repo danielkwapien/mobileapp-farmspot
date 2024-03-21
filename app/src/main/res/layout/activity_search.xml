@@ -10,14 +10,16 @@
         android:id="@+id/searchQuery"
         android:layout_width="341dp"
         android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/custom_eddittext"
         android:fontFamily="@font/nunito_regular"
         android:hint="Search"
         android:padding="8dp"
         android:textColor="@color/black"
         android:textColorHighlight="@color/cardview_dark_background"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
