@@ -7,7 +7,10 @@ public class HomeCardElement {
     public String location;
     public String category;
 
-    public HomeCardElement(String title, String price, String location, String category) {
+    public int image;
+
+    public HomeCardElement(String title, String price, String location, String category, int image) {
+        this.image = image;
         this.title = title;
         this.price = price;
         this.location = location;
@@ -45,5 +48,9 @@ public class HomeCardElement {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public int getImage() { return image; }
+
+    public void setImage(int image) { this.image = image; }
 
 }

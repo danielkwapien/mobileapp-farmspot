@@ -25,6 +25,7 @@ public class HomeRecyclerViewHolder extends RecyclerView.ViewHolder {
     }
 
     void bindData(final HomeCardElement item) {
+        image.setImageResource(item.getImage());
         title.setText(item.getTitle());
         price.setText(item.getPrice());
         location.setText(item.getLocation());
