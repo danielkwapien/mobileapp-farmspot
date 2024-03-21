@@ -90,14 +90,13 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
 
     @Override
     public void onItemClick(HomeCardElement item) {
-        Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
-        // Intent intent = new Intent(this, BuyActivity.class);
-        // intent.putExtra("title", item.getTitle());
-        // intent.putExtra("price", item.getPrice());
-        // intent.putExtra("location", item.getLocation());
-        // intent.putExtra("category", item.getCategory());
-        // intent.putExtra("image", item.getImage());
-        // startActivity(intent);
+        Intent intent = new Intent(this, BuyActivity.class);
+        intent.putExtra("title", item.getTitle());
+        intent.putExtra("price", item.getPrice());
+        intent.putExtra("location", item.getLocation());
+        intent.putExtra("category", item.getCategory());
+        intent.putExtra("image", item.getImage());
+        startActivity(intent);
     }
 
 
