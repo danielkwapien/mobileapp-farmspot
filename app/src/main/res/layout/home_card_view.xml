@@ -25,13 +25,11 @@
 
             <ImageView
                 android:id="@+id/homeCardImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:paddingLeft="14dp"
-                android:paddingRight="14dp"
                 app:srcCompat="@drawable/baseline_search_24"
                 android:layout_alignParentLeft="true"/>
 
@@ -40,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="2dp"
                 android:layout_toEndOf="@id/homeCardImage"
                 android:orientation="vertical">
