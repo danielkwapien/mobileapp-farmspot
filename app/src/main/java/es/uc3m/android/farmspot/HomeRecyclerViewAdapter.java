@@ -13,6 +13,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     private List<HomeCardElement> data;
     private LayoutInflater inflater;
     private Context context;
+    private ItemListener listener;
 
     public HomeRecyclerViewAdapter(List<HomeCardElement> itemList, Context context) {
         this.inflater = LayoutInflater.from(context);
