@@ -64,11 +64,14 @@
                     android:layout_height="50dp"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/custom_eddittext"
-                    android:hint="@string/password"
-                    android:padding="8dp"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/nunito_regular"
-                    android:textColorHighlight="@color/cardview_dark_background" />
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:padding="8dp"
+                    android:selectAllOnFocus="true"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/cardview_dark_background"
+                    tools:text="@string/password" />
 
                 <Button
                     android:id="@+id/loginButton"
