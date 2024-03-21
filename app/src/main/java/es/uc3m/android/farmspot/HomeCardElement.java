@@ -1,6 +1,8 @@
 package es.uc3m.android.farmspot;
 
-public class HomeCardElement {
+import java.io.Serializable;
+
+public class HomeCardElement implements Serializable {
 
     public String title;
     public String price;

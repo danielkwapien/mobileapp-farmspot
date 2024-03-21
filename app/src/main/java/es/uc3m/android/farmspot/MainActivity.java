@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -20,7 +21,7 @@ import java.util.Objects;
 
 import es.uc3m.android.farmspot.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemListener {
 
     private ActivityMainBinding binding;
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new HomeRecyclerViewAdapter(generateData(), this));
+        recyclerView.setAdapter(new HomeRecyclerViewAdapter(generateData(), this, this));
 
 
 
@@ -86,5 +87,18 @@ public class MainActivity extends AppCompatActivity {
         data.add(new HomeCardElement("Apple tree seeds", "0,39 €/g", "Navaluenga, Ávila", "Seed, fruit", R.drawable.apple_seeds));
         return data;
     }
+
+    @Override
+    public void onItemClick(HomeCardElement item) {
+        Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+        // Intent intent = new Intent(this, BuyActivity.class);
+        // intent.putExtra("title", item.getTitle());
+        // intent.putExtra("price", item.getPrice());
+        // intent.putExtra("location", item.getLocation());
+        // intent.putExtra("category", item.getCategory());
+        // intent.putExtra("image", item.getImage());
+        // startActivity(intent);
+    }
+
 
 }
