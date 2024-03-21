@@ -19,7 +19,7 @@
         app:menu="@menu/bottom_nav_menu">
 
         <EditText
-            android:id="@+id/loginUsername"
+            android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="40dp"
@@ -44,7 +44,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/loginUsername"
+        android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/custom_eddittext"

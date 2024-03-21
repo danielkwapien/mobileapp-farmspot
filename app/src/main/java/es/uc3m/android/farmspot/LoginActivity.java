@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -30,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        username = findViewById(R.id.loginUsername);
+        username = findViewById(R.id.userName);
         password = findViewById(R.id.loginPassword);
         loginButton = findViewById(R.id.loginButton);
         loginTextView = findViewById(R.id.loginTextView);
