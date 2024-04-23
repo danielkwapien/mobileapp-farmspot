@@ -1,5 +1,6 @@
 package es.uc3m.android.farmspot;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,14 +13,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username;
     EditText password;
     Button loginButton;
-
     TextView loginTextView;
+
+    // Firebase Authentication
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,21 +38,21 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        username = findViewById(R.id.userName);
+        username = findViewById(R.id.purchases);
         password = findViewById(R.id.loginPassword);
         loginButton = findViewById(R.id.loginButton);
-        loginTextView = findViewById(R.id.loginTextView);
+        loginTextView = findViewById(R.id.registerScreen);
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (username.getText().toString().trim().equals("user") && password.getText().toString().trim().equals("1234")){
-                    Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                    openMainActivity();
-                }
-                else{
-                    Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
-                }
+                String email = username.getText().toString().trim();
+                String userPassword = password.getText().toString().trim();
+
+                signIn(email, userPassword);
             }
         });
 
@@ -55,8 +64,25 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void signIn(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                            openMainActivity();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
     public void openRegisterActivity(){
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
     }
 
