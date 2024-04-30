@@ -48,7 +48,7 @@
                     android:fontFamily="@font/nunito_black"/>
 
                 <EditText
-                    android:id="@+id/purchases"
+                    android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="40dp"

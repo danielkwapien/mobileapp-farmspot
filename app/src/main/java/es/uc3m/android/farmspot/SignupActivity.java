@@ -53,7 +53,6 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = username.getText().toString().trim();
                 String userPassword = password.getText().toString().trim();
-
                 signUp(email, userPassword);
             }
         });

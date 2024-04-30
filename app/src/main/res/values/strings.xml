@@ -20,6 +20,8 @@
 
     <string name="list_text">Element</string>
 
+    <string name="auth_failed">Authentication failed: </string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- SUPPORT PAGE -->
@@ -52,5 +54,6 @@
     <string name="Logout">Logout</string>
     <string name="customer_support">Customer Support</string>
     <string name="help">Help</string>
+    <string name="title_activity_auth_listener">AuthListener</string>
 
 </resources>

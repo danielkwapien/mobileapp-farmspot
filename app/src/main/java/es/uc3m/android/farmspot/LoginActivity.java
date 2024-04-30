@@ -26,9 +26,6 @@ public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     TextView loginTextView;
 
-    // Firebase Authentication
-    private FirebaseAuth mAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,19 +35,16 @@ public class LoginActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login);
 
-        username = findViewById(R.id.purchases);
+        username = findViewById(R.id.username);
         password = findViewById(R.id.loginPassword);
         loginButton = findViewById(R.id.loginButton);
         loginTextView = findViewById(R.id.registerScreen);
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = username.getText().toString().trim();
-                String userPassword = password.getText().toString().trim();
+                String email = username.getText().toString();
+                String userPassword = password.getText().toString();
 
                 signIn(email, userPassword);
             }
@@ -65,20 +59,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void signIn(String email, String password) {
+        // Initialize Firebase Auth
+        // Firebase Authentication
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                            openMainActivity();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                .addOnCompleteListener(this, new AuthListener(this, mAuth));
     }
 
     public void openRegisterActivity(){
