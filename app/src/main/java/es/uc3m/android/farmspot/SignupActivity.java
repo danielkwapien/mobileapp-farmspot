@@ -21,15 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Objects;
 
 public class SignupActivity extends AppCompatActivity {
-
-    EditText username;
-    EditText password;
-    Button registerButton;
-
     TextView signupTextView;
-
-    // Firebase Authentication
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +32,8 @@ public class SignupActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_register);
 
-        username = findViewById(R.id.registerUser);
-        password = findViewById(R.id.registerPassword);
-        registerButton = findViewById(R.id.registerButton);
+        findViewById(R.id.registerButton).setOnClickListener(this::signUp);
         signupTextView = findViewById(R.id.signupTextView);
-
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = username.getText().toString().trim();
-                String userPassword = password.getText().toString().trim();
-                signUp(email, userPassword);
-            }
-        });
 
         signupTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,34 +43,36 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    // Method to create new user using Firebase Authentication
-    private void signUp(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign up success, update UI with the signed-up user's information
-                            Toast.makeText(SignupActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-                            openMainActivity();
-                        } else {
-                            // If sign up fails, display a message to the user.
-                            Toast.makeText(SignupActivity.this, "Registration Failed!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
     // Method to open LoginActivity
     public void openLoginActivity(){
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
-    // Method to open MainActivity
-    public void openMainActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+    private void signUp(View view) {
+        EditText username = findViewById(R.id.registerUser);
+        EditText password = findViewById(R.id.registerPassword);
+
+        String userEmail = username.getText().toString();
+        String userPassword = password.getText().toString();
+
+        if (!isValidEmailAddress(userEmail)){
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            // Initialize Firebase Auth
+            mAuth.createUserWithEmailAndPassword(userEmail, userPassword)
+                    .addOnCompleteListener(this, new AuthListener(this, mAuth));
+        }
+    }
+
+    private void signIn(View view) {
+        finish();
+    }
+
+    public boolean isValidEmailAddress(String email) {
+        String ePattern =
+                "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
     }
 }
