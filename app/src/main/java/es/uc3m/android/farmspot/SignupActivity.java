@@ -56,7 +56,7 @@ public class SignupActivity extends AppCompatActivity {
         String userEmail = username.getText().toString();
         String userPassword = password.getText().toString();
 
-        if (!isValidEmailAddress(userEmail)){
+        if (isValidEmailAddress(userEmail)){
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             // Initialize Firebase Auth
             mAuth.createUserWithEmailAndPassword(userEmail, userPassword)
