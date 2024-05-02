@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -17,6 +19,8 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class AddActivity extends AppCompatActivity {
@@ -35,21 +39,48 @@ public class AddActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_add);
 
+        EditText titleEditText = findViewById(R.id.titleAddProduct);
+        EditText descriptionEditText = findViewById(R.id.descriptionEditText);
+        EditText categoryEditText = findViewById(R.id.categoryEditText);
+        EditText priceEditText = findViewById(R.id.priceEditText);
+        EditText unitEditText = findViewById(R.id.unitEditText);
+
+
+
         db = FirebaseFirestore.getInstance();
 
-        db.collection("product")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(AddActivity.this, "Producted added sucessfully", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddActivity.this, "Failed to upload the product", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        findViewById(R.id.AddProduct).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String title = titleEditText.getText().toString();
+                String description = descriptionEditText.getText().toString();
+                String category = categoryEditText.getText().toString();
+                String price = priceEditText.getText().toString();
+                String unit = unitEditText.getText().toString();
+
+                Map<String, Object> product = new HashMap<>();
+                product.put("Title", title);
+                product.put("Description", description);
+                product.put("Category", category);
+                product.put("Price", price);
+                product.put("unit", unit);
+
+                db.collection("product")
+                        .add(product)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(AddActivity.this, "Product added successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(AddActivity.this, "Failed to upload the product", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -81,4 +112,5 @@ public class AddActivity extends AppCompatActivity {
             }
         });
     }
+
 }
