@@ -79,6 +79,10 @@ public class AddActivity extends AppCompatActivity {
                                 Toast.makeText(AddActivity.this, "Failed to upload the product", Toast.LENGTH_SHORT).show();
                             }
                         });
+
+                openMainActivity();
+
+
             }
         });
 
@@ -111,6 +115,11 @@ public class AddActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void openMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 }
