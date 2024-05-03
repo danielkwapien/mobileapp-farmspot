@@ -29,8 +29,9 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         return data.size();
     }
 
+    @NonNull
     @Override
-    public HomeRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HomeRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.home_card_view, parent, false);
         return new HomeRecyclerViewHolder(this, view);
     }
@@ -38,7 +39,6 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull HomeRecyclerViewHolder holder, int position) {
         holder.bindData(data.get(position));
-
     }
 
     public void setItems(List<HomeCardElement> items ){

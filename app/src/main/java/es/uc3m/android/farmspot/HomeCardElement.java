@@ -8,16 +8,20 @@ public class HomeCardElement implements Serializable {
     public String price;
     public String location;
     public String category;
+    public String unit;
 
-    public int image;
+    //public int image;
 
-    public HomeCardElement(String title, String price, String location, String category, int image) {
-        this.image = image;
+    public HomeCardElement(String title, String price, String unit, String location, String category) {
+        //this.image = image;
         this.title = title;
         this.price = price;
+        this.unit = unit;
         this.location = location;
         this.category = category;
     }
+
+    public HomeCardElement() { }
 
     public String getTitle() {
         return title;
@@ -33,6 +37,14 @@ public class HomeCardElement implements Serializable {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public String getLocation() {
@@ -51,8 +63,8 @@ public class HomeCardElement implements Serializable {
         this.category = category;
     }
 
-    public int getImage() { return image; }
+    //public int getImage() { return image; }
 
-    public void setImage(int image) { this.image = image; }
+    //public void setImage(int image) { this.image = image; }
 
 }

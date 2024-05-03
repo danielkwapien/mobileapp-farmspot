@@ -2,6 +2,7 @@ package es.uc3m.android.farmspot;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
@@ -9,6 +10,8 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,10 +37,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
 
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new HomeRecyclerViewAdapter(generateData(), this, this));
+        readDataFromFirestore();
 
 
 
@@ -79,14 +79,39 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
 
     }
 
-    private List<HomeCardElement> generateData() {
-        List<HomeCardElement> data = new ArrayList<>();
-        data.add(new HomeCardElement("White potato", "0,94 €/kg", "Chinchón, Madrid", "Vegetables, Potato", R.drawable.potato));
-        data.add(new HomeCardElement("Galician blonde cow", "1.500 €/unit", "Abeledo, A Coruña", "Animal, Cow", R.drawable.cow));
-        data.add(new HomeCardElement("Hard red wheat", "0,37 €/kg", "Villacastín, Segovia", "Cereal, Wheat", R.drawable.wheat));
-        data.add(new HomeCardElement("Apple tree seeds", "0,39 €/g", "Navaluenga, Ávila", "Seed, fruit", R.drawable.apple_seeds));
-        return data;
+    //private List<HomeCardElement> generateData() {
+    //    List<HomeCardElement> data = new ArrayList<>();
+    //    data.add(new HomeCardElement("White potato", "0,94 €/kg", "Chinchón, Madrid", "Vegetables, Potato", R.drawable.potato));
+    //    data.add(new HomeCardElement("Galician blonde cow", "1.500 €/unit", "Abeledo, A Coruña", "Animal, Cow", R.drawable.cow));
+    //    data.add(new HomeCardElement("Hard red wheat", "0,37 €/kg", "Villacastín, Segovia", "Cereal, Wheat", R.drawable.wheat));
+    //    data.add(new HomeCardElement("Apple tree seeds", "0,39 €/g", "Navaluenga, Ávila", "Seed, fruit", R.drawable.apple_seeds));
+    //    return data;
+    //}
+
+    private void readDataFromFirestore() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("product")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<HomeCardElement> data = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            HomeCardElement product = document.toObject(HomeCardElement.class);
+                            data.add(product);
+                        }
+                        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                        recyclerView.setAdapter(new HomeRecyclerViewAdapter(data, this, this));
+                        // Update your UI with the 'data' list
+                    } else {
+                        Log.e("Firestore Read Error", String.valueOf(task.getException()));
+                        // Handle the error
+                    }
+                });
     }
+
 
     @Override
     public void onItemClick(HomeCardElement item) {

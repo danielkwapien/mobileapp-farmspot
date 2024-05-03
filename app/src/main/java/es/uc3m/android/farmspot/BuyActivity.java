@@ -38,8 +38,6 @@ public class BuyActivity extends AppCompatActivity {
         price.setText(data.getPrice());
         location.setText(data.getLocation());
         category.setText(data.getCategory());
-        image.setImageResource(data.getImage());
-
 
 
     }
