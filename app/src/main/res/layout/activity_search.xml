@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -26,14 +27,14 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-
-    <ImageView
+    <!-- MapView -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mapView"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:layout_above="@id/nav_view"
-        android:src="@drawable/map_example"
-        android:scaleType="fitXY"/>
+        android:layout_above="@id/nav_view" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -42,6 +43,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
         android:background="?android:attr/windowBackground"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        tools:ignore="VisualLintBottomNav" />
 
 </RelativeLayout>
