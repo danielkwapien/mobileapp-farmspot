@@ -28,7 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_profile);
 
-        /*cardView = findViewById(R.id.profileHelp);*/
+        cardView = findViewById(R.id.profileHelp);
 
         cardView.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), SupportActivity.class));

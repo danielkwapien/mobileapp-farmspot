@@ -1,8 +1,15 @@
 package es.uc3m.android.farmspot;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.MenuItem;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,6 +32,39 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
                 .findFragmentById(R.id.mapView);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_search);
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.navigation_home){
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                    return true;
+                }
+                else if (item.getItemId() == R.id.navigation_search){
+                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                    finish();
+                    return true;
+                }
+                else if (item.getItemId() == R.id.navigation_add){
+                    startActivity(new Intent(getApplicationContext(), AddActivity.class));
+                    finish();
+                    return true;
+                }
+                else if (item.getItemId() == R.id.navigation_favorites){
+                    startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
+                    finish();
+                    return true;
+                }
+                else if (item.getItemId() == R.id.navigation_favorites){
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
