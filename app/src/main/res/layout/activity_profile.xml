@@ -84,7 +84,7 @@
                 android:textSize="18sp"/>
 
         </androidx.cardview.widget.CardView>
-
+        <!--
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                 android:textSize="18sp"/>
 
         </androidx.cardview.widget.CardView>
-
+        -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -171,9 +171,11 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/logoutCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginHorizontal="10dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp">
@@ -183,6 +185,7 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="10dp"
                 android:layout_marginHorizontal="10dp"
+
                 android:gravity="start"
                 android:fontFamily="@font/nunito_semibold"
                 android:text="@string/Logout"
