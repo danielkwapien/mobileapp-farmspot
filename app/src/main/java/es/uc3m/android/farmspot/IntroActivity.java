@@ -3,6 +3,7 @@ package es.uc3m.android.farmspot;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -42,6 +43,21 @@ public class IntroActivity extends AppCompatActivity {
                 openRegisterActivity();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Check for previous login
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        if (isLoggedIn) {
+            // User is already logged in, skip login activity
+            Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void openLoginActivity(){
