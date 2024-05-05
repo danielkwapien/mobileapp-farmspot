@@ -39,12 +39,8 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
 
         readDataFromFirestore();
 
-
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
-
-
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
