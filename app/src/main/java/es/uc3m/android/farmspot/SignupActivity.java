@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.Objects;
 
@@ -51,11 +53,14 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void signUp(View view) {
-        EditText username = findViewById(R.id.registerUser);
+        EditText email = findViewById(R.id.registerUser);
+        EditText usernameEdit = findViewById(R.id.registerUserName);
         EditText password = findViewById(R.id.registerPassword);
 
-        String userEmail = username.getText().toString();
+        String userEmail = email.getText().toString();
+        String userName = usernameEdit.getText().toString();
         String userPassword = password.getText().toString();
+
 
         if (isValidEmailAddress(userEmail)){
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -65,11 +70,22 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(userName)
+                                        .build();
+
+                                user.updateProfile(profileUpdates);
+
                                 // Save login status
                                 SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putBoolean("isLoggedIn", true);
+                                editor.putString("userName", userName);
                                 editor.apply();
+
+
+
 
                                 Toast.makeText(SignupActivity.this, "User created!",
                                         Toast.LENGTH_SHORT).show();
