@@ -44,7 +44,7 @@ public class BuyActivity extends AppCompatActivity {
                     .into(image); // Load the image into the ImageView
         }
         title.setText(data.getTitle());
-        price.setText(data.getPrice());
+        price.setText(data.getPrice() + "€ / " + data.getUnit());
         location.setText(data.getLocation());
         category.setText(data.getCategory());
 

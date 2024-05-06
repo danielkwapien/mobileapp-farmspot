@@ -37,6 +37,7 @@ public class HomeRecyclerViewHolder extends RecyclerView.ViewHolder {
         this.parent = parent;
     }
 
+    @SuppressLint("SetTextI18n")
     void bindData(final HomeCardElement item) {
         if (item.getImageUrl() != null) {
             Glide.with(image.getContext()) // Get a Glide instance
@@ -46,7 +47,7 @@ public class HomeRecyclerViewHolder extends RecyclerView.ViewHolder {
                     .into(image); // Load the image into the ImageView
         }
         title.setText(item.getTitle());
-        price.setText(item.getPrice());
+        price.setText(item.getPrice() + "€ / " + item.getUnit());
         location.setText(item.getLocation());
         category.setText(item.getCategory());
 
