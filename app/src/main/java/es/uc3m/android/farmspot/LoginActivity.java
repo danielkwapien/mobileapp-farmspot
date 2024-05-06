@@ -49,6 +49,14 @@ public class LoginActivity extends AppCompatActivity {
                 String userPassword = password.getText().toString();
 
                 signIn(email, userPassword);
+                
+                if (email.isEmpty() || userPassword.isEmpty()) {
+                    // Display a toast message asking to fill in both fields
+                    Toast.makeText(LoginActivity.this, "Please fill in both username and password fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Proceed with sign-in
+                    signIn(email, userPassword);
+                }
             }
         });
 
