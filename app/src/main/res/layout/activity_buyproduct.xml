@@ -134,11 +134,23 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/sellerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginHorizontal="10dp"
+            android:text="Sold by: Seller"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:fontFamily="@font/nunito_bold"/>
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/quantityCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:layout_marginHorizontal="10dp"
             app:cardCornerRadius="10dp"

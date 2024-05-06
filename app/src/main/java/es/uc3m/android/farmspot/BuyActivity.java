@@ -15,10 +15,11 @@ import java.util.Objects;
 
 public class BuyActivity extends AppCompatActivity {
 
-    TextView title, price, location, category;
+    TextView title, price, location, category, seller;
     ImageView image;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class BuyActivity extends AppCompatActivity {
         location = findViewById(R.id.buyLocation);
         category = findViewById(R.id.buyCategory);
         image = findViewById(R.id.buyImage);
+        seller = findViewById(R.id.sellerName);
 
         if (data.getImageUrl() != null) {
             Glide.with(image.getContext()) // Get a Glide instance
@@ -44,6 +46,7 @@ public class BuyActivity extends AppCompatActivity {
                     .into(image); // Load the image into the ImageView
         }
         title.setText(data.getTitle());
+        seller.setText("Sold by: " + data.getSeller());
         price.setText(data.getPrice() + "€ / " + data.getUnit());
         location.setText(data.getLocation());
         category.setText(data.getCategory());

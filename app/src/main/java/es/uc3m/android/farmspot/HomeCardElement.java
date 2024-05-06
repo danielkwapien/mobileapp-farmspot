@@ -3,6 +3,7 @@ package es.uc3m.android.farmspot;
 import android.net.Uri;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class HomeCardElement implements Serializable {
 
@@ -12,6 +13,8 @@ public class HomeCardElement implements Serializable {
     public String category;
     public String unit;
     public String imageUrl;
+    public String seller;
+    public String userId;
 
     //public int image;
 
@@ -22,6 +25,8 @@ public class HomeCardElement implements Serializable {
         this.unit = unit;
         this.location = location;
         this.category = category;
+        this.userId = userId;
+        this.seller = seller;
     }
 
     public HomeCardElement() { }
@@ -70,4 +75,11 @@ public class HomeCardElement implements Serializable {
 
     public void setImageUrl(String image) { this.imageUrl = image; }
 
+    public String getUserId() { return userId; }
+
+    public void setUserId(String userId) { this.userId = userId; }
+
+    public String getSeller() { return seller; }
+
+    public void setSeller(String seller) { this.seller = seller; }
 }

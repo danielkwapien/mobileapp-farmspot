@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import es.uc3m.android.farmspot.databinding.ActivityMainBinding;
 
@@ -117,7 +118,14 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
                         List<HomeCardElement> data = new ArrayList<>();
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             HomeCardElement product = document.toObject(HomeCardElement.class);
-                            data.add(product);
+                            String sellerUserId = product.getUserId(); // Assuming you have this in HomeCardElement
+
+                            db.collection("users").document(sellerUserId).get()
+                                    .addOnSuccessListener(userDoc -> {
+                                        String sellerUsername = userDoc.getString("username");
+                                        product.setSeller(sellerUsername); // Assuming you add this setter
+                                        data.add(product); // Now product has the username
+                                    });
                         }
                         RecyclerView recyclerView = findViewById(R.id.recycler_view);
                         recyclerView.setHasFixedSize(true);
