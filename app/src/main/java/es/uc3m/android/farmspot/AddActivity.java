@@ -1,31 +1,54 @@
 package es.uc3m.android.farmspot;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresExtension;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public class AddActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
+    private ImageView imageViewProduct;
+    private Button buttonUploadImage;
+    private static final int PICK_IMAGE_REQUEST = 100;
+    private Uri imageUri;
+    private FirebaseStorage storage;
+    private StorageReference storageRef;
+    ActivityResultLauncher<Intent> resultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +67,26 @@ public class AddActivity extends AppCompatActivity {
         EditText categoryEditText = findViewById(R.id.categoryEditText);
         EditText priceEditText = findViewById(R.id.priceEditText);
         EditText unitEditText = findViewById(R.id.unitEditText);
-
+        imageViewProduct = findViewById(R.id.imageViewProduct);
 
 
         db = FirebaseFirestore.getInstance();
+        storage = FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
+
+        findViewById(R.id.buttonUploadImage).setOnClickListener(view -> openImageChooser());
+
+        resultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        if (data != null) {
+                            imageUri = data.getData();
+                            imageViewProduct.setImageURI(imageUri);
+                        }
+                    }
+                });
 
         findViewById(R.id.AddProduct).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,11 +105,29 @@ public class AddActivity extends AppCompatActivity {
                 }
 
                 Map<String, Object> product = new HashMap<>();
-                product.put("Title", title);
-                product.put("Description", description);
-                product.put("Category", category);
-                product.put("Price", price);
+                product.put("title", title);
+                product.put("description", description);
+                product.put("category", category);
+                product.put("price", price);
                 product.put("unit", unit);
+
+                if (imageUri != null) {
+                    // Create a reference to the image
+                    StorageReference imageRef = storageRef.child(UUID.randomUUID().toString());
+
+                    // Upload the image
+                    imageRef.putFile(imageUri)
+                            .addOnSuccessListener(taskSnapshot -> {
+                                // Get image download URL
+                                taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
+                                    // Add image url to the product Map
+                                    product.put("imageUrl", uri.toString());
+                                });
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(AddActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
+                            });
+                }
 
                 db.collection("product")
                         .add(product)
@@ -121,6 +178,13 @@ public class AddActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void openImageChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        resultLauncher.launch(intent);  // Use the resultLauncher to launch the intent
     }
 
     public void openMainActivity(){
