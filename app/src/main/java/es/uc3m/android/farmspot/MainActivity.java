@@ -1,6 +1,9 @@
 package es.uc3m.android.farmspot;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -15,6 +18,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +32,15 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
 
     private ActivityMainBinding binding;
 
+    private static final String ACTION_PRODUCT_ADDED = "es.uc3m.android.farmspot.product_added";
+
+    private BroadcastReceiver productAddedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            readDataFromFirestore();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         setContentView(R.layout.activity_main);
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                productAddedReceiver, new IntentFilter(ACTION_PRODUCT_ADDED));
 
         readDataFromFirestore();
 
@@ -83,6 +99,13 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
     //    data.add(new HomeCardElement("Apple tree seeds", "0,39 €/g", "Navaluenga, Ávila", "Seed, fruit", R.drawable.apple_seeds));
     //    return data;
     //}
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Unregister the receiver when the activity is destroyed
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(productAddedReceiver);
+    }
 
     private void readDataFromFirestore() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();

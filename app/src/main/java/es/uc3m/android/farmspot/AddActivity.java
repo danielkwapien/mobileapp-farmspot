@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -33,6 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,6 +51,8 @@ public class AddActivity extends AppCompatActivity {
     private FirebaseStorage storage;
     private StorageReference storageRef;
     ActivityResultLauncher<Intent> resultLauncher;
+
+    private static final String ACTION_PRODUCT_ADDED = "es.uc3m.android.farmspot.product_added";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +101,7 @@ public class AddActivity extends AppCompatActivity {
                 String category = categoryEditText.getText().toString();
                 String price = priceEditText.getText().toString();
                 String unit = unitEditText.getText().toString();
-
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 
                 if (title.isEmpty() || description.isEmpty() || category.isEmpty() || price.isEmpty() || unit.isEmpty()) {
                     Toast.makeText(AddActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
@@ -110,6 +114,10 @@ public class AddActivity extends AppCompatActivity {
                 product.put("category", category);
                 product.put("price", price);
                 product.put("unit", unit);
+                product.put("userId", userId);
+
+
+
 
                 if (imageUri != null) {
                     // Create a reference to the image
@@ -127,6 +135,9 @@ public class AddActivity extends AppCompatActivity {
                                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                                 @Override
                                                 public void onSuccess(DocumentReference documentReference) {
+                                                    Intent broadcastIntent = new Intent(ACTION_PRODUCT_ADDED);
+                                                    LocalBroadcastManager.getInstance(AddActivity.this).sendBroadcast(broadcastIntent);
+
                                                     Toast.makeText(AddActivity.this, "Product added successfully", Toast.LENGTH_SHORT).show();
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
