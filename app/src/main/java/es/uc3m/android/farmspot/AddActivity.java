@@ -122,26 +122,25 @@ public class AddActivity extends AppCompatActivity {
                                 taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
                                     // Add image url to the product Map
                                     product.put("imageUrl", uri.toString());
+                                    db.collection("product")
+                                            .add(product)
+                                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                @Override
+                                                public void onSuccess(DocumentReference documentReference) {
+                                                    Toast.makeText(AddActivity.this, "Product added successfully", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(AddActivity.this, "Failed to upload the product", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
                                 });
                             })
                             .addOnFailureListener(e -> {
                                 Toast.makeText(AddActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
                             });
                 }
-
-                db.collection("product")
-                        .add(product)
-                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(AddActivity.this, "Product added successfully", Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(AddActivity.this, "Failed to upload the product", Toast.LENGTH_SHORT).show();
-                            }
-                        });
 
                 openMainActivity();
 
