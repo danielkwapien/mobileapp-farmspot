@@ -60,6 +60,15 @@ public class SignupActivity extends AppCompatActivity {
         String userEmail = email.getText().toString();
         String userName = usernameEdit.getText().toString();
         String userPassword = password.getText().toString();
+        
+        if (userEmail.isEmpty() || userName.isEmpty() || userPassword.isEmpty()) {
+            // Display a toast message asking to fill in all fields
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return; // Exit the method without attempting sign up
+        }
+        
+
+
 
 
         if (isValidEmailAddress(userEmail)){
