@@ -59,6 +59,13 @@ public class AddActivity extends AppCompatActivity {
                 String price = priceEditText.getText().toString();
                 String unit = unitEditText.getText().toString();
 
+                // Check if any field is empty and ask to fulfill it
+                if (title.isEmpty() || description.isEmpty() || category.isEmpty() || price.isEmpty() || unit.isEmpty()) {
+                    // Display a toast message asking to fill in all fields
+                    Toast.makeText(AddActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    return; // Exit the method without adding the product
+                }
+
                 Map<String, Object> product = new HashMap<>();
                 product.put("Title", title);
                 product.put("Description", description);
