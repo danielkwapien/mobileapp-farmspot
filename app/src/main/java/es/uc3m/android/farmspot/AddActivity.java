@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,7 +38,10 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -71,6 +76,7 @@ public class AddActivity extends AppCompatActivity {
         EditText categoryEditText = findViewById(R.id.categoryEditText);
         EditText priceEditText = findViewById(R.id.priceEditText);
         EditText unitEditText = findViewById(R.id.unitEditText);
+        EditText locationEditText = findViewById(R.id.locationEditText);
         imageViewProduct = findViewById(R.id.imageViewProduct);
 
 
@@ -101,12 +107,15 @@ public class AddActivity extends AppCompatActivity {
                 String category = categoryEditText.getText().toString();
                 String price = priceEditText.getText().toString();
                 String unit = unitEditText.getText().toString();
+                String location = locationEditText.getText().toString();
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                
-                if (title.isEmpty() || description.isEmpty() || category.isEmpty() || price.isEmpty() || unit.isEmpty()) {
+
+                if (title.isEmpty() || description.isEmpty() || category.isEmpty() || price.isEmpty() || location.isEmpty() || unit.isEmpty()) {
                     Toast.makeText(AddActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                    return; 
+                    return;
                 }
+
+                double[] coordinates = convertLocationToCoordinates(location);
 
                 Map<String, Object> product = new HashMap<>();
                 product.put("title", title);
@@ -115,9 +124,8 @@ public class AddActivity extends AppCompatActivity {
                 product.put("price", price);
                 product.put("unit", unit);
                 product.put("userId", userId);
-
-
-
+                product.put("latitude", coordinates[0]);
+                product.put("longitude", coordinates[1]);
 
                 if (imageUri != null) {
                     // Create a reference to the image
@@ -154,8 +162,6 @@ public class AddActivity extends AppCompatActivity {
                 }
 
                 openMainActivity();
-
-
             }
         });
 
@@ -202,4 +208,27 @@ public class AddActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private double[] convertLocationToCoordinates(String location) {
+        // Initialize Geocoder
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        double[] coordinates = new double[2];
+
+        try {
+            List<Address> addresses = geocoder.getFromLocationName(location, 1);
+
+            if (!addresses.isEmpty()) {
+
+                Address address = addresses.get(0);
+                double latitude = address.getLatitude();
+                double longitude = address.getLongitude();
+                coordinates[0] = latitude;
+                coordinates[1] = longitude;
+            } else {
+                Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return coordinates;
+    }
 }
