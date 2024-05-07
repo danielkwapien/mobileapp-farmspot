@@ -7,56 +7,50 @@
     tools:context=".AddActivity">
 
     <!-- Back icon -->
-    <ImageView
-        android:id="@+id/backIcon"
-        android:layout_width="44dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/backicon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/locationEditText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Location"
-        app:layout_constraintTop_toTopOf="@+id/imageViewProduct"
-        tools:layout_editor_absoluteX="0dp" />
+        android:hint="@string/locationEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="25dp" />
 
     <ImageView
         android:id="@+id/imageViewProduct"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="200dp"
-        android:maxHeight="200dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/add_picture_product"
-        app:layout_constraintTop_toBottomOf="@+id/backIcon"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/locationEditText" />
 
     <Button
         android:id="@+id/buttonUploadImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload Image"
-        android:layout_marginTop="10dp"
+        android:text="@string/UploadImage"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewProduct"/>
+        app:layout_constraintTop_toBottomOf="@id/imageViewProduct"/>
 
+    <!-- Title CardView -->
     <androidx.cardview.widget.CardView
         android:id="@+id/titleCardView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonUploadImage">
+        app:layout_constraintTop_toBottomOf="@id/buttonUploadImage">
 
         <EditText
             android:id="@+id/titleAddProduct"
@@ -70,91 +64,107 @@
 
     </androidx.cardview.widget.CardView>
 
-
+    <!-- Description CardView -->
     <androidx.cardview.widget.CardView
         android:id="@+id/descriptionCardView"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginHorizontal="10dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/categoryCardView"
-        app:layout_constraintTop_toBottomOf="@+id/titleCardView">
-
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/categoryCardView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginHorizontal="10dp"
-        app:cardCornerRadius="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/priceUnitLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.567"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleCardView">
 
         <EditText
-            android:id="@+id/categoryEditText"
+            android:id="@+id/descriptionEditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="8dp"
-            android:hint= "@string/CategoryProduct"
-            android:background="@drawable/custom_eddittext"
+            android:hint="@string/DescriptionProduct"
             android:textColor="@android:color/black"
+            android:background="@drawable/custom_eddittext"
             android:textSize="16sp" />
 
     </androidx.cardview.widget.CardView>
 
+    <!-- Category CardView -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/categoryCardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionCardView">
 
+        <EditText
+            android:id="@+id/categoryEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:hint="@string/CategoryProduct"
+            android:textColor="@android:color/black"
+            android:background="@drawable/custom_eddittext"
+            android:textSize="16sp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Price and Unit Layout -->
     <LinearLayout
         android:id="@+id/priceUnitLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginHorizontal="10dp"
-        app:layout_constraintStart_toStartOf="@id/descriptionCardView"
-        app:layout_constraintBottom_toTopOf="@+id/AddProduct">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/categoryCardView">
 
+        <!-- Price CardView -->
         <androidx.cardview.widget.CardView
             android:id="@+id/priceCardView"
-            android:layout_width="250dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="8dp"
             app:cardElevation="0dp">
 
             <EditText
                 android:id="@+id/priceEditText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="8dp"
+                android:hint="@string/PricePerUnit"
                 android:textColor="@android:color/black"
                 android:background="@drawable/custom_eddittext"
-                android:textSize="16sp"
-                android:hint= "@string/PricePerUnit"/>
+                android:textSize="16sp" />
 
         </androidx.cardview.widget.CardView>
 
+        <!-- Unit CardView -->
         <androidx.cardview.widget.CardView
             android:id="@+id/unitCardView"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginHorizontal="10dp"
-            app:cardCornerRadius="10dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            app:cardCornerRadius="8dp"
             app:cardElevation="0dp">
 
             <EditText
                 android:id="@+id/unitEditText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:hint= "@string/UnitProduct"
+                android:hint="@string/UnitProduct"
                 android:textColor="@android:color/black"
                 android:background="@drawable/custom_eddittext"
                 android:textSize="16sp" />
@@ -163,20 +173,21 @@
 
     </LinearLayout>
 
+    <!-- Add Product Button -->
     <Button
         android:id="@+id/AddProduct"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="12dp"
         android:text="@string/add_product_button"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/priceUnitLayout"
         android:backgroundTint="@color/green_main"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:cornerRadius="30dp"/>
 
-
+    <!-- Bottom Navigation View -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"
@@ -188,17 +199,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
-
-    <EditText
-        android:id="@+id/descriptionEditText"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/custom_eddittext"
-        android:hint="@string/DescriptionProduct"
-        android:padding="8dp"
-        android:textColor="@android:color/black"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
