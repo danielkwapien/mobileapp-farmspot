@@ -110,8 +110,29 @@ public class AddActivity extends AppCompatActivity {
                 String location = locationEditText.getText().toString();
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+                findViewById(R.id.titleRequiredIndicator).setVisibility(View.INVISIBLE);
+                findViewById(R.id.locationRequiredIndicator).setVisibility(View.INVISIBLE);
+                findViewById(R.id.descriptionRequiredIndicator).setVisibility(View.INVISIBLE);
+                findViewById(R.id.categoryRequiredIndicator).setVisibility(View.INVISIBLE);
+                findViewById(R.id.priceRequiredIndicator).setVisibility(View.INVISIBLE);
+                findViewById(R.id.unitRequiredIndicator).setVisibility(View.INVISIBLE);
                 if (title.isEmpty() || description.isEmpty() || category.isEmpty() || price.isEmpty() || location.isEmpty() || unit.isEmpty()) {
                     Toast.makeText(AddActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+
+                    // Show indicators for empty fields
+                    if (title.isEmpty() && findViewById(R.id.titleRequiredIndicator) != null)
+                        findViewById(R.id.titleRequiredIndicator).setVisibility(View.VISIBLE);
+                    if (location.isEmpty() && findViewById(R.id.locationRequiredIndicator) != null)
+                        findViewById(R.id.locationRequiredIndicator).setVisibility(View.VISIBLE);
+                    if (description.isEmpty() && findViewById(R.id.descriptionRequiredIndicator) != null)
+                        findViewById(R.id.descriptionRequiredIndicator).setVisibility(View.VISIBLE);
+                    if (category.isEmpty() && findViewById(R.id.categoryRequiredIndicator) != null)
+                        findViewById(R.id.categoryRequiredIndicator).setVisibility(View.VISIBLE);
+                    if (price.isEmpty() && findViewById(R.id.priceRequiredIndicator) != null)
+                        findViewById(R.id.priceRequiredIndicator).setVisibility(View.VISIBLE);
+                    if (unit.isEmpty() && findViewById(R.id.unitRequiredIndicator) != null)
+                        findViewById(R.id.unitRequiredIndicator).setVisibility(View.VISIBLE);
+
                     return;
                 }
 
