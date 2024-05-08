@@ -87,4 +87,8 @@ public class HomeCardElement implements Serializable {
     public String getSeller() { return seller; }
 
     public void setSeller(String seller) { this.seller = seller; }
+
+    public String getProductId() { return productId; }
+
+    public void setProductId(String productId) { this.seller = productId; }
 }
