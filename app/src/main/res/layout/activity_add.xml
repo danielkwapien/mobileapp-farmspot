@@ -11,10 +11,10 @@
         android:id="@+id/imageViewProduct"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:layout_marginTop="16dp"
         android:src="@drawable/add_picture_product"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonUploadImage"
@@ -52,7 +52,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!-- Location Cardview -->
+    <!-- Location -->
 
     <androidx.cardview.widget.CardView
         android:id="@+id/locationCardView"
@@ -217,3 +217,4 @@
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
