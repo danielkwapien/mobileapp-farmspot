@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import es.uc3m.android.farmspot.databinding.ActivityMainBinding;
 
@@ -122,6 +123,9 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         List<HomeCardElement> data = new ArrayList<>();
+                        AtomicInteger counter = new AtomicInteger(); // Counter for Firestore calls
+                        int docCount = task.getResult().size(); // Number of documents
+
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             HomeCardElement product = document.toObject(HomeCardElement.class);
                             product.setProductId(document.getId());
@@ -132,14 +136,13 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
                                         String sellerUsername = userDoc.getString("username");
                                         product.setSeller(sellerUsername); // Assuming you add this setter
                                         data.add(product); // Now product has the username
-                                        progressBar.setVisibility(View.GONE);
+
+                                        if (counter.incrementAndGet() == docCount) { // All Firestore calls completed
+                                            progressBar.setVisibility(View.GONE);
+                                            updateUI(data); // Update UI after all Firestore calls
+                                        }
                                     });
                         }
-                        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-                        recyclerView.setHasFixedSize(true);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                        recyclerView.setAdapter(new HomeRecyclerViewAdapter(data, this, this));
-                        // Update your UI with the 'data' list
                     } else {
                         Log.e("Firestore Read Error", String.valueOf(task.getException()));
                         // Handle the error
@@ -147,6 +150,12 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
                 });
     }
 
+    private void updateUI(List<HomeCardElement> data) {
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new HomeRecyclerViewAdapter(data, this, this));
+    }
 
     @Override
     public void onItemClick(HomeCardElement item) {
@@ -154,8 +163,4 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
         intent.putExtra("data", item);
         startActivity(intent);
     }
-
-
-
-
 }

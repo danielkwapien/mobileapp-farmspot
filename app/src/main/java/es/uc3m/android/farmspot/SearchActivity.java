@@ -117,4 +117,6 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
             e.printStackTrace();
         }
     }
+
 }
+
