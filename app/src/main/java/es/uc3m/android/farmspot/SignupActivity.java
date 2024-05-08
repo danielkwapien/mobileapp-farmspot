@@ -66,10 +66,6 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return; // Exit the method without attempting sign up
         }
-        
-
-
-
 
         if (isValidEmailAddress(userEmail)){
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -84,29 +80,31 @@ public class SignupActivity extends AppCompatActivity {
                                         .setDisplayName(userName)
                                         .build();
 
-                                user.updateProfile(profileUpdates);
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    // Save login status
+                                                    SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                    editor.putBoolean("isLoggedIn", true);
+                                                    editor.putString("userName", userName);
+                                                    editor.apply();
 
-                                // Save login status
-                                SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putBoolean("isLoggedIn", true);
-                                editor.putString("userName", userName);
-                                editor.apply();
-
-
-
-
-                                Toast.makeText(SignupActivity.this, "User created!",
-                                        Toast.LENGTH_SHORT).show();
-
-                                // Proceed to main activity
-                                Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finish(); // Finish the login activity
+                                                    // Redirect to main activity
+                                                    Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                } else {
+                                                    // Handle failure
+                                                    Toast.makeText(SignupActivity.this, "Failed to update profile.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
                             } else {
-                                // Handle authentication failure
-                                Toast.makeText(SignupActivity.this, "User creation failed.",
-                                        Toast.LENGTH_SHORT).show();
+                                // Handle failure
+                                Toast.makeText(SignupActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
