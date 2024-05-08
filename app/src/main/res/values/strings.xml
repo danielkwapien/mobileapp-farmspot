@@ -40,6 +40,8 @@
     <string name="PricePerUnit">Price per Unit in Euros</string>
     <string name="UnitProduct">Units</string>
     <string name="Quantity">Quantity</string>
+    <string name="locationEditText">Location</string>
+    <string name="UploadImage">Upload Image</string>
     <string name="additional_specification">Add any additional specification</string>
     <!-- BUY PRODUCT -->
     <string name="defaultaddress">Your default address</string>
