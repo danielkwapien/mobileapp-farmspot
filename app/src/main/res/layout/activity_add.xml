@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AddActivity">
 
-    <!-- Back icon -->
-
-    <EditText
-        android:id="@+id/locationEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/locationEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="25dp" />
 
     <ImageView
         android:id="@+id/imageViewProduct"
@@ -25,8 +14,7 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/add_picture_product"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/locationEditText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonUploadImage"
@@ -64,6 +52,34 @@
 
     </androidx.cardview.widget.CardView>
 
+    <!-- Location Cardview -->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/locationCardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleCardView">
+
+        <EditText
+            android:id="@+id/locationEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:hint="@string/locationEditText"
+            android:textColor="@android:color/black"
+            android:background="@drawable/custom_eddittext"
+            android:textSize="16sp" />
+
+    </androidx.cardview.widget.CardView>
+
+
     <!-- Description CardView -->
     <androidx.cardview.widget.CardView
         android:id="@+id/descriptionCardView"
@@ -76,7 +92,7 @@
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleCardView">
+        app:layout_constraintTop_toBottomOf="@id/locationCardView">
 
         <EditText
             android:id="@+id/descriptionEditText"
