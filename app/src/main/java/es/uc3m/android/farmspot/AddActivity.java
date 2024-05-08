@@ -147,6 +147,7 @@ public class AddActivity extends AppCompatActivity {
                 product.put("userId", userId);
                 product.put("latitude", coordinates[0]);
                 product.put("longitude", coordinates[1]);
+                product.put("sold", false);
 
                 if (imageUri != null) {
                     // Create a reference to the image
