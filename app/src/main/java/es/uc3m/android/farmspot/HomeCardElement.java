@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public class HomeCardElement implements Serializable {
 
+    public String productId;
     public String title;
     public String price;
     public String location;
@@ -16,10 +17,13 @@ public class HomeCardElement implements Serializable {
     public String seller;
     public String userId;
 
+    public Boolean sold;
+
     //public int image;
 
-    public HomeCardElement(String imageUrl, String title, String price, String unit, String location, String category) {
+    public HomeCardElement(String imageUrl, String title, String price, String unit, String location, String category, Boolean sold) {
         this.imageUrl = imageUrl;
+        this.productId = productId;
         this.title = title;
         this.price = price;
         this.unit = unit;
@@ -27,6 +31,7 @@ public class HomeCardElement implements Serializable {
         this.category = category;
         this.userId = userId;
         this.seller = seller;
+        this.sold = sold;
     }
 
     public HomeCardElement() { }

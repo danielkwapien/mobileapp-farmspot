@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -50,6 +51,13 @@ public class BuyActivity extends AppCompatActivity {
         price.setText(data.getPrice() + "€ / " + data.getUnit());
         location.setText(data.getLocation());
         category.setText(data.getCategory());
+
+        findViewById(R.id.BuyProduct).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
     }
