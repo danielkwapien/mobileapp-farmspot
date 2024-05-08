@@ -1,4 +1,6 @@
 package es.uc3m.android.farmspot;
+
+
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -37,6 +39,8 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
         // Initialize the Geocoder
         geocoder = new Geocoder(this, Locale.getDefault());
 
+        //double[] coordinates = convertLocationToCoordinates(location);
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         assert mapFragment != null;
@@ -53,18 +57,22 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
                     finish();
                     return true;
                 } else if (item.getItemId() == R.id.navigation_search) {
-                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
-                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.navigation_add) {
                     startActivity(new Intent(getApplicationContext(), AddActivity.class));
                     finish();
                     return true;
-                } else if (item.getItemId() == R.id.navigation_favorites) {
+                } else if (item.getItemId() == R.id.navigation_favorites){
                     startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
                     finish();
                     return true;
-                } else return item.getItemId() == R.id.navigation_favorites;
+                }
+                else if (item.getItemId() == R.id.navigation_profile){
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    finish();
+                    return true;
+                }
+                return false;
             }
         });
 

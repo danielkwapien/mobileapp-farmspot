@@ -49,7 +49,7 @@ public class BuyActivity extends AppCompatActivity {
         title.setText(data.getTitle());
         seller.setText("Sold by: " + data.getSeller());
         price.setText(data.getPrice() + "€ / " + data.getUnit());
-        location.setText(data.getLocation());
+        // location.setText(data.getLatitude());
         category.setText(data.getCategory());
 
         findViewById(R.id.BuyProduct).setOnClickListener(new View.OnClickListener() {

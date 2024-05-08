@@ -19,12 +19,8 @@ public class HomeRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     public final HomeRecyclerViewAdapter parent;
     public final TextView title, price, location, category;
-
     public  final ImageView image;
-
     public final LinearLayout container;
-
-
 
     public HomeRecyclerViewHolder(HomeRecyclerViewAdapter parent, View view) {
         super(view);

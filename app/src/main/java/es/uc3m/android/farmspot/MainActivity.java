@@ -7,8 +7,10 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,7 +27,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 import es.uc3m.android.farmspot.databinding.ActivityMainBinding;
 
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
         }
     };
 
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
 
         LocalBroadcastManager.getInstance(this).registerReceiver(
                 productAddedReceiver, new IntentFilter(ACTION_PRODUCT_ADDED));
+
+        progressBar = findViewById(R.id.progressBar);
 
         readDataFromFirestore();
 
@@ -110,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
 
     private void readDataFromFirestore() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        progressBar.setVisibility(View.VISIBLE);
 
         db.collection("product")
                 .get()
@@ -118,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
                         List<HomeCardElement> data = new ArrayList<>();
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             HomeCardElement product = document.toObject(HomeCardElement.class);
+                            product.setProductId(document.getId());
                             String sellerUserId = product.getUserId(); // Assuming you have this in HomeCardElement
 
                             db.collection("users").document(sellerUserId).get()
@@ -125,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
                                         String sellerUsername = userDoc.getString("username");
                                         product.setSeller(sellerUsername); // Assuming you add this setter
                                         data.add(product); // Now product has the username
+                                        progressBar.setVisibility(View.GONE);
                                     });
                         }
                         RecyclerView recyclerView = findViewById(R.id.recycler_view);
@@ -146,6 +154,8 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
         intent.putExtra("data", item);
         startActivity(intent);
     }
+
+
 
 
 }

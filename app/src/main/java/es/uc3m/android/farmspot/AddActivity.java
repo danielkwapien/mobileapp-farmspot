@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -136,8 +137,6 @@ public class AddActivity extends AppCompatActivity {
                     return;
                 }
 
-                double[] coordinates = convertLocationToCoordinates(location);
-
                 Map<String, Object> product = new HashMap<>();
                 product.put("title", title);
                 product.put("description", description);
@@ -145,8 +144,7 @@ public class AddActivity extends AppCompatActivity {
                 product.put("price", price);
                 product.put("unit", unit);
                 product.put("userId", userId);
-                product.put("latitude", coordinates[0]);
-                product.put("longitude", coordinates[1]);
+                product.put("location", location);
                 product.put("sold", false);
 
                 if (imageUri != null) {
