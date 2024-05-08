@@ -49,11 +49,18 @@
             android:textColor="@android:color/black"
             android:background="@drawable/custom_eddittext"
             android:textSize="16sp" />
+        <!-- Title Required Indicator -->
+        <TextView
+            android:id="@+id/titleRequiredIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_red"
+            android:layout_marginStart="4dp"
+            android:visibility="invisible"/>
 
     </androidx.cardview.widget.CardView>
 
-    <!-- Location -->
-
+    <!-- Location CardView-->
     <androidx.cardview.widget.CardView
         android:id="@+id/locationCardView"
         android:layout_width="0dp"
@@ -76,6 +83,13 @@
             android:textColor="@android:color/black"
             android:background="@drawable/custom_eddittext"
             android:textSize="16sp" />
+        <TextView
+            android:id="@+id/locationRequiredIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_red"
+            android:layout_marginStart="4dp"
+            android:visibility="invisible"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -103,6 +117,13 @@
             android:textColor="@android:color/black"
             android:background="@drawable/custom_eddittext"
             android:textSize="16sp" />
+        <TextView
+            android:id="@+id/descriptionRequiredIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_red"
+            android:layout_marginStart="4dp"
+            android:visibility="invisible"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -129,6 +150,14 @@
             android:textColor="@android:color/black"
             android:background="@drawable/custom_eddittext"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/categoryRequiredIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/light_red"
+            android:layout_marginStart="4dp"
+            android:visibility="invisible"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -162,6 +191,13 @@
                 android:textColor="@android:color/black"
                 android:background="@drawable/custom_eddittext"
                 android:textSize="16sp" />
+            <TextView
+                android:id="@+id/priceRequiredIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/light_red"
+                android:layout_marginStart="4dp"
+                android:visibility="invisible"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -184,6 +220,13 @@
                 android:textColor="@android:color/black"
                 android:background="@drawable/custom_eddittext"
                 android:textSize="16sp" />
+            <TextView
+                android:id="@+id/unitRequiredIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/light_red"
+                android:layout_marginStart="4dp"
+                android:visibility="invisible"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -217,4 +260,5 @@
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
