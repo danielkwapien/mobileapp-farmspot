@@ -7,10 +7,13 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,11 +29,14 @@ import java.util.Objects;
 public class BuyActivity extends AppCompatActivity {
 
     TextView title, price, location, category, seller;
+    EditText quantityEditText;
     ImageView image;
+    int quantity;
+    double totalPrice;
     private static final String ACTION_PRODUCT_SOLD = "es.uc3m.android.farmspot.product_sold";
 
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "SetTextI18n", "DefaultLocale"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,24 @@ public class BuyActivity extends AppCompatActivity {
         category = findViewById(R.id.buyCategory);
         image = findViewById(R.id.buyImage);
         seller = findViewById(R.id.sellerName);
+        quantityEditText = findViewById(R.id.quantityEditText);
+
+        quantityEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not required for this implementation
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                calculateTotalPrice(data);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Not used
+            }
+        });
 
         if (data.getImageUrl() != null) {
             Glide.with(image.getContext()) // Get a Glide instance
@@ -57,11 +81,27 @@ public class BuyActivity extends AppCompatActivity {
                     .error(R.drawable.add_picture_product) // Optional: Image to display on error
                     .into(image); // Load the image into the ImageView
         }
+
+        int quantity = 1;
+        double totalPrice = data.getPrice();
+        try{
+            quantity = Integer.parseInt(quantityEditText.getText().toString().trim());
+            totalPrice = data.getPrice() * quantity;
+        } catch (NumberFormatException ignored){
+
+        }
+
+
+
         title.setText(data.getTitle());
         seller.setText("Sold by: " + data.getSeller());
-        price.setText(data.getPrice() + "€ / " + data.getUnit());
+        price.setText(String.format("%.2f", totalPrice) + "€ in total");
         // location.setText(data.getLatitude());
         category.setText(data.getCategory());
+
+
+
+
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         String sellerId = data.getUserId();
@@ -140,6 +180,16 @@ public class BuyActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    private void calculateTotalPrice(HomeCardElement data) {
+        try {
+            quantity = Integer.parseInt(quantityEditText.getText().toString().trim());
+        } catch (NumberFormatException e) {
+            quantity = 1;  // Set default quantity if parsing fails
+        }
+        totalPrice = data.getPrice() * quantity;
+        price.setText(String.format("%.2f", totalPrice) + "€ in total");
     }
 
     public void openMainActivity(){

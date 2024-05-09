@@ -156,6 +156,7 @@
                 android:background="@drawable/custom_eddittext"
                 android:padding="10dp"
                 android:textColor="@android:color/black"
+                android:inputType="number"
                 android:textSize="16sp" />
 
         </androidx.cardview.widget.CardView>
@@ -203,7 +204,7 @@
                         android:id="@+id/specifyAddressRadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/specifyaddress" />
+                        android:text="@string/pickup" />
 
                 </RadioGroup>
 
@@ -244,7 +245,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:layout_marginHorizontal="10dp"
-            android:text="0,94€ in total"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="24sp"
             android:fontFamily="@font/nunito_extrabold"/>
