@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,10 +24,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
-import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +54,37 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
                 .findFragmentById(R.id.mapView);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+        // Initialize bottom navigation view
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_search);
 
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.navigation_home) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_search) {
+                    // Already in SearchActivity, do nothing
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_add) {
+                    startActivity(new Intent(getApplicationContext(), AddActivity.class));
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_favorites) {
+                    startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
+                    finish();
+                    return true;
+                } else if (item.getItemId() == R.id.navigation_profile){
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    finish();
+                    return true;
+                }
+                return false;
+                }
+
+        });
         requestLocationPermission();
     }
 
@@ -138,6 +170,10 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
                 displayCurrentLocation();
             } else {
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+                // Permission denied, go back to MainActivity
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         }
     }
