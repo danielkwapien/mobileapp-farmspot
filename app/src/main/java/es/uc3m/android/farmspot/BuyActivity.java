@@ -1,6 +1,5 @@
 package es.uc3m.android.farmspot;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -9,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -169,7 +167,7 @@ public class BuyActivity extends AppCompatActivity {
                 return true;
             }
             else if (item.getItemId() == R.id.navigation_favorites){
-                startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
+                startActivity(new Intent(getApplicationContext(), InformationActivity.class));
                 finish();
                 return true;
             }

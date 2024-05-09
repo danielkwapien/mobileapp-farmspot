@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
                     return true;
                 }
                 else if (item.getItemId() == R.id.navigation_favorites){
-                    startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
+                    startActivity(new Intent(getApplicationContext(), InformationActivity.class));
                     finish();
                     return true;
                 }
