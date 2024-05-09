@@ -50,7 +50,7 @@
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".InformationActivity"
+            android:name=".FavoritesActivity"
             android:exported="false" />
         <activity
             android:name=".AddActivity"
@@ -83,3 +83,4 @@
     </application>
 
 </manifest>
+
