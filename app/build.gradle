@@ -21,9 +21,10 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-
+        // Define your API key here
+            buildConfigField("String", "MAPS_API_KEY", "\"AIzaSyD13p8IQ-v-Qa_jYGi6JPeJ9to9jNHf0OU\"")
     }
-
+    android.buildFeatures.buildConfig true
     buildTypes {
         release {
             minifyEnabled false
