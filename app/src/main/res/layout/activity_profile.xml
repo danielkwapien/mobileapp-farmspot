@@ -84,7 +84,7 @@
                 android:textSize="18sp"/>
 
         </androidx.cardview.widget.CardView>
-        <!--
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -97,6 +97,7 @@
             android:textSize="18sp"/>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/purchasesCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -111,12 +112,12 @@
                 android:layout_marginHorizontal="10dp"
                 android:gravity="start"
                 android:fontFamily="@font/nunito_semibold"
-                android:text="@string/transactions"
+                android:text="@string/purchases"
                 android:textColor="@color/black"
                 android:textSize="18sp"/>
 
         </androidx.cardview.widget.CardView>
-
+        <!--
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

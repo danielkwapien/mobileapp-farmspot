@@ -9,6 +9,8 @@
     <string name="title_favorites">Favorites</string>
     <string name="title_profile">Profile</string>
 
+    <string name="main_prod">Main products</string>
+
     <string name="hello">Hello!</string>
     <string name="username">User</string>
     <string name="emailregister">Email</string>
@@ -58,6 +60,8 @@
     <string name="customer_support">Customer Support</string>
     <string name="help">Help</string>
     <string name="title_activity_auth_listener">AuthListener</string>
+    <string name="no_display">Nothing to display!</string>
+    <string name="purchases_prod">Your purchases</string>
 
     <string name="cannot_buy_product">You cannot buy this product</string>
 

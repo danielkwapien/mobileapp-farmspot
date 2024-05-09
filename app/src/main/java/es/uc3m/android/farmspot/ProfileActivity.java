@@ -59,6 +59,13 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.purchasesCard).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), PurchasesActivity.class));
+            }
+        });
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_profile);
 

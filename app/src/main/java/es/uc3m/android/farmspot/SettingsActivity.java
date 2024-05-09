@@ -3,6 +3,7 @@ package es.uc3m.android.farmspot;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -77,6 +78,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         userDocRef.update(updates)
                 .addOnSuccessListener(unused -> {
+                    SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("userName", nameEditText.getText().toString());
+                    editor.apply();
+
                     Toast.makeText(SettingsActivity.this, "Settings updated", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
