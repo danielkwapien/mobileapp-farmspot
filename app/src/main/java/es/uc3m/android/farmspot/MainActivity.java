@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(productAddedReceiver);
     }
 
-    private void readDataFromFirestore() {
+    public void readDataFromFirestore() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         progressBar.setVisibility(View.VISIBLE);
 

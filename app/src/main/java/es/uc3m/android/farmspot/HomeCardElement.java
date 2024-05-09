@@ -37,6 +37,9 @@ public class HomeCardElement implements Serializable {
 
     public HomeCardElement() { }
 
+    public HomeCardElement(String testProduct, String testPrice, String testLocation, String testCategory, int testImage) {
+    }
+
     public String getTitle() {
         return title;
     }
