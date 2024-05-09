@@ -119,7 +119,7 @@ public class AddActivity extends AppCompatActivity {
                 String description = descriptionEditText.getText().toString();
                 String category = categorySpinner.getSelectedItem().toString();
 
-                String price = priceEditText.getText().toString();
+                Double price = Double.parseDouble(priceEditText.getText().toString());
                 String unit = unitSpinner.getSelectedItem().toString();
                 String location = locationEditText.getText().toString();
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -130,7 +130,7 @@ public class AddActivity extends AppCompatActivity {
                 findViewById(R.id.categoryRequiredIndicator).setVisibility(View.INVISIBLE);
                 findViewById(R.id.priceRequiredIndicator).setVisibility(View.INVISIBLE);
                 findViewById(R.id.unitRequiredIndicator).setVisibility(View.INVISIBLE);
-                if (title.isEmpty() || description.isEmpty() || category.isEmpty() || price.isEmpty() || location.isEmpty() || unit.isEmpty()) {
+                if (title.isEmpty() || description.isEmpty() || category.isEmpty() || priceEditText.getText().toString().isEmpty() || location.isEmpty() || unit.isEmpty()) {
                     Toast.makeText(AddActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
 
                     // Show indicators for empty fields
@@ -140,9 +140,9 @@ public class AddActivity extends AppCompatActivity {
                         findViewById(R.id.locationRequiredIndicator).setVisibility(View.VISIBLE);
                     if (description.isEmpty())
                         findViewById(R.id.descriptionRequiredIndicator).setVisibility(View.VISIBLE);
-                    if (price.isEmpty())
+                    if (priceEditText.getText().toString().isEmpty())
                         findViewById(R.id.categoryRequiredIndicator).setVisibility(View.VISIBLE);
-                    if (price.isEmpty())
+                    if (priceEditText.getText().toString().isEmpty())
                         findViewById(R.id.priceRequiredIndicator).setVisibility(View.VISIBLE);
                     if (unit.isEmpty())
                         findViewById(R.id.unitRequiredIndicator).setVisibility(View.VISIBLE);

@@ -190,8 +190,10 @@
                 android:padding="8dp"
                 android:hint="@string/PricePerUnit"
                 android:textColor="@android:color/black"
+                android:inputType="number"
                 android:background="@drawable/custom_eddittext"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:autofillHints="10" />
             <TextView
                 android:id="@+id/priceRequiredIndicator"
                 android:layout_width="wrap_content"
