@@ -98,7 +98,7 @@ public class SignupActivity extends AppCompatActivity {
                                                     finish();
                                                 } else {
                                                     // Handle failure
-                                                    Toast.makeText(SignupActivity.this, "Failed to update profile.", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(SignupActivity.this, "Failed to create profile.", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });

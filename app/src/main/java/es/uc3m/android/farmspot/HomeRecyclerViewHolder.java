@@ -43,7 +43,7 @@ public class HomeRecyclerViewHolder extends RecyclerView.ViewHolder {
                     .into(image); // Load the image into the ImageView
         }
         title.setText(item.getTitle());
-        price.setText(item.getPrice() + "€ / " + item.getUnit());
+        price.setText(item.getPrice().toString() + "€ / " + item.getUnit());
         location.setText(item.getLocation());
         category.setText(item.getCategory());
 

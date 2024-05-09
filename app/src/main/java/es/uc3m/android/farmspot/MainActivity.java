@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
                 productAddedReceiver, new IntentFilter(ACTION_PRODUCT_ADDED));
 
         LocalBroadcastManager.getInstance(this).registerReceiver(
-                productAddedReceiver, new IntentFilter(ACTION_PRODUCT_SOLD));
+                productSoldReceiver, new IntentFilter(ACTION_PRODUCT_SOLD));
 
         progressBar = findViewById(R.id.progressBar);
 

@@ -10,7 +10,7 @@ public class HomeCardElement implements Serializable {
     public String productId;
     public String title;
     public String description;
-    public String price;
+    public Double price;
     public String location;
     public String category;
     public String unit;
@@ -21,7 +21,7 @@ public class HomeCardElement implements Serializable {
 
     //public int image;
 
-    public HomeCardElement(String imageUrl, String title, String description, String price, String unit, String location, String category, Boolean sold) {
+    public HomeCardElement(String imageUrl, String title, String description, Double price, String unit, String location, String category, Boolean sold) {
         this.imageUrl = imageUrl;
         this.productId = productId;
         this.title = title;
@@ -52,13 +52,11 @@ public class HomeCardElement implements Serializable {
     public void setDescription(String title) { this.description = title;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
+    public void setPrice(Double price) { this.price = price; }
 
     public String getUnit() {
         return unit;

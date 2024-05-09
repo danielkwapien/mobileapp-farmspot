@@ -53,8 +53,8 @@ public class BuyActivity extends AppCompatActivity {
         if (data.getImageUrl() != null) {
             Glide.with(image.getContext()) // Get a Glide instance
                     .load(data.getImageUrl()) // Load from the URL
-                    .placeholder(R.drawable.profile_sample) // Optional: Placeholder image
-                    .error(R.drawable.undraw_flowers_vx06) // Optional: Image to display on error
+                    .placeholder(R.drawable.add_picture_product) // Optional: Placeholder image
+                    .error(R.drawable.add_picture_product) // Optional: Image to display on error
                     .into(image); // Load the image into the ImageView
         }
         title.setText(data.getTitle());

@@ -181,9 +181,13 @@ public class AddActivity extends AppCompatActivity {
                             .addOnFailureListener(e -> {
                                 Toast.makeText(AddActivity.this, "Image upload failed", Toast.LENGTH_SHORT).show();
                             });
+                    openMainActivity();
+                }
+                else{
+                    Toast.makeText(AddActivity.this, "Please upload an image", Toast.LENGTH_SHORT).show();
                 }
 
-                openMainActivity();
+
             }
         });
 
