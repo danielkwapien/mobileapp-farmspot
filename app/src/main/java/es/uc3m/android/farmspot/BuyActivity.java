@@ -66,6 +66,7 @@ public class BuyActivity extends AppCompatActivity {
 
         if (sellerId.equals(buyerId)) {
             findViewById(R.id.BuyProduct).setEnabled(false); // Disable the button
+            findViewById(R.id.warningBuyer).setVisibility(View.VISIBLE);
         }
 
         findViewById(R.id.BuyProduct).setOnClickListener(new View.OnClickListener() {
@@ -74,7 +75,7 @@ public class BuyActivity extends AppCompatActivity {
 
                 if (sellerId.equals(buyerId)) {
                     Toast.makeText(BuyActivity.this, "You cannot buy your own product", Toast.LENGTH_SHORT).show();
-                    findViewById(R.id.BuyProduct).setEnabled(false); // Disable the button
+
                     return; // Exit the onClick to prevent purchase
                 }
 
