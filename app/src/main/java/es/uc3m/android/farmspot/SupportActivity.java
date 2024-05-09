@@ -43,6 +43,8 @@ public class SupportActivity extends AppCompatActivity {
                     return true;
                 }
                 else if (item.getItemId() == R.id.navigation_add){
+                    startActivity(new Intent(getApplicationContext(), AddActivity.class));
+                    finish();
                     return true;
                 }
                 else if (item.getItemId() == R.id.navigation_favorites){
