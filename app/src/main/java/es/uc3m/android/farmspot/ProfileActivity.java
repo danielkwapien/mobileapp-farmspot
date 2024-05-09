@@ -88,7 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
                     return true;
                 }
                 else if (item.getItemId() == R.id.navigation_favorites){
-                    startActivity(new Intent(getApplicationContext(), InformationActivity.class));
+                    startActivity(new Intent(getApplicationContext(), PurchasesActivity.class));
                     finish();
                     return true;
                 }

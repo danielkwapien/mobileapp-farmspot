@@ -77,7 +77,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
                     finish();
                     return true;
                 } else if (item.getItemId() == R.id.navigation_favorites) {
-                    startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
+                    startActivity(new Intent(getApplicationContext(), PurchasesActivity.class));
                     finish();
                     return true;
                 } else if (item.getItemId() == R.id.navigation_profile){
