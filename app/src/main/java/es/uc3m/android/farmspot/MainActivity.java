@@ -36,8 +36,16 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
     private ActivityMainBinding binding;
 
     private static final String ACTION_PRODUCT_ADDED = "es.uc3m.android.farmspot.product_added";
+    private static final String ACTION_PRODUCT_SOLD = "es.uc3m.android.farmspot.product_sold";
 
     private BroadcastReceiver productAddedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            readDataFromFirestore();
+        }
+    };
+
+    private BroadcastReceiver productSoldReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             readDataFromFirestore();
@@ -57,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
 
         LocalBroadcastManager.getInstance(this).registerReceiver(
                 productAddedReceiver, new IntentFilter(ACTION_PRODUCT_ADDED));
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(
+                productAddedReceiver, new IntentFilter(ACTION_PRODUCT_SOLD));
 
         progressBar = findViewById(R.id.progressBar);
 
@@ -129,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             HomeCardElement product = document.toObject(HomeCardElement.class);
                             product.setProductId(document.getId());
+                            //Log.d("Main activity", document.getId() + " => " + document.getData());
                             String sellerUserId = product.getUserId(); // Assuming you have this in HomeCardElement
 
                             db.collection("users").document(sellerUserId).get()

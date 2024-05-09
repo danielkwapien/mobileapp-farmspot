@@ -1,23 +1,30 @@
 package es.uc3m.android.farmspot;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class BuyActivity extends AppCompatActivity {
 
     TextView title, price, location, category, seller;
     ImageView image;
+    private static final String ACTION_PRODUCT_SOLD = "es.uc3m.android.farmspot.product_sold";
 
 
     @SuppressLint("MissingInflatedId")
@@ -55,10 +62,47 @@ public class BuyActivity extends AppCompatActivity {
         findViewById(R.id.BuyProduct).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 1. Get sellerId, buyerId, and productId
 
+                // 2. Get a Firestore instance
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                String sellerId = data.getUserId();
+                String buyerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String productId = data.getProductId();
+
+                // 3. Create a new sales document
+                db.collection("sales")
+                        .add(new HashMap<String, Object>() {{
+                            put("sellerId", sellerId);
+                            put("buyerId", buyerId);
+                            put("productId", productId);
+                        }})
+                        .addOnSuccessListener(documentReference -> {
+                            db.collection("product")
+                                    .document(productId)
+                                    .update("sold", true)
+                                    .addOnSuccessListener(unused -> {
+                                        Toast.makeText(BuyActivity.this, "Purchase completed", Toast.LENGTH_SHORT).show();
+                                        Intent broadcastIntent = new Intent(ACTION_PRODUCT_SOLD);
+                                        LocalBroadcastManager.getInstance(BuyActivity.this).sendBroadcast(broadcastIntent);
+                                        openMainActivity();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(BuyActivity.this, "Failed to complete the purchase", Toast.LENGTH_SHORT).show();
+                                    });
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(BuyActivity.this, "Failed to complete the purchase", Toast.LENGTH_SHORT).show();
+                        });
             }
         });
 
 
+    }
+
+    public void openMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
