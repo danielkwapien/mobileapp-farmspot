@@ -29,6 +29,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:key="AIzaSyD13p8IQ-v-Qa_jYGi6JPeJ9to9jNHf0OU"
             android:value="AIzaSyD13p8IQ-v-Qa_jYGi6JPeJ9to9jNHf0OU" />
+        <meta-data
+            android:name='com.google.android.libraries.places:places'
+            android:key= 'AIzaSyD13p8IQ-v-Qa_jYGi6JPeJ9to9jNHf0OU'
+            android:value= 'AIzaSyD13p8IQ-v-Qa_jYGi6JPeJ9to9jNHf0OU'/>
 
         <activity
             android:name=".AuthListener"
