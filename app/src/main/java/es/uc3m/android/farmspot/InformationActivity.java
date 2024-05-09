@@ -14,7 +14,9 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Objects;
 
-public class FavoritesActivity extends AppCompatActivity {
+public class InformationActivity extends AppCompatActivity {
+
+    private static final String[] WIKIPEDIA_ARTICLES = {"Apple", "Farming"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

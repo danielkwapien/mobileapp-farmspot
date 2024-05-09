@@ -74,7 +74,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
                     finish();
                     return true;
                 } else if (item.getItemId() == R.id.navigation_favorites) {
-                    startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
+                    startActivity(new Intent(getApplicationContext(), InformationActivity.class));
                     finish();
                     return true;
                 } else if (item.getItemId() == R.id.navigation_profile){
@@ -175,4 +175,3 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
         }
     }
 }
-
