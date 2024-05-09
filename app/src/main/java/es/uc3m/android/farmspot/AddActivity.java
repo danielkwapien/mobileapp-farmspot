@@ -18,9 +18,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -75,7 +77,12 @@ public class AddActivity extends AppCompatActivity {
 
         EditText titleEditText = findViewById(R.id.titleAddProduct);
         EditText descriptionEditText = findViewById(R.id.descriptionEditText);
-        EditText categoryEditText = findViewById(R.id.categoryEditText);
+        Spinner categorySpinner = findViewById(R.id.categorySpinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.category_options, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(adapter);
+
         EditText priceEditText = findViewById(R.id.priceEditText);
         EditText unitEditText = findViewById(R.id.unitEditText);
         EditText locationEditText = findViewById(R.id.locationEditText);
@@ -106,7 +113,8 @@ public class AddActivity extends AppCompatActivity {
 
                 String title = titleEditText.getText().toString();
                 String description = descriptionEditText.getText().toString();
-                String category = categoryEditText.getText().toString();
+                String category = categorySpinner.getSelectedItem().toString();
+
                 String price = priceEditText.getText().toString();
                 String unit = unitEditText.getText().toString();
                 String location = locationEditText.getText().toString();

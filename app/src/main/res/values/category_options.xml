@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_options">
+        <item>Product</item>
+        <item>Animal product</item>
+        <item>Grains</item>
+        <item>Plants</item>
+        <item>Processed goods</item>
+        <item>Other</item>
+    </string-array>
+</resources>

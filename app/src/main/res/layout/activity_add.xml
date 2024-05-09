@@ -141,15 +141,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/descriptionCardView">
 
-        <EditText
-            android:id="@+id/categoryEditText"
+        <Spinner
+            android:id="@+id/categorySpinner"
+            android:hint="@string/CategoryProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:hint="@string/CategoryProduct"
-            android:textColor="@android:color/black"
             android:background="@drawable/custom_eddittext"
-            android:textSize="16sp" />
+            android:padding="8dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"/>
+
 
         <TextView
             android:id="@+id/categoryRequiredIndicator"
