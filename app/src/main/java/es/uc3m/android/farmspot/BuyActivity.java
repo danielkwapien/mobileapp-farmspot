@@ -59,18 +59,25 @@ public class BuyActivity extends AppCompatActivity {
         // location.setText(data.getLatitude());
         category.setText(data.getCategory());
 
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String sellerId = data.getUserId();
+        String buyerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String productId = data.getProductId();
+
+        if (sellerId.equals(buyerId)) {
+            findViewById(R.id.BuyProduct).setEnabled(false); // Disable the button
+        }
+
         findViewById(R.id.BuyProduct).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 1. Get sellerId, buyerId, and productId
 
-                // 2. Get a Firestore instance
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                String sellerId = data.getUserId();
-                String buyerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                String productId = data.getProductId();
+                if (sellerId.equals(buyerId)) {
+                    Toast.makeText(BuyActivity.this, "You cannot buy your own product", Toast.LENGTH_SHORT).show();
+                    findViewById(R.id.BuyProduct).setEnabled(false); // Disable the button
+                    return; // Exit the onClick to prevent purchase
+                }
 
-                // 3. Create a new sales document
                 db.collection("sales")
                         .add(new HashMap<String, Object>() {{
                             put("sellerId", sellerId);
