@@ -1,48 +1,41 @@
 package es.uc3m.android.farmspot;
 
-import android.Manifest;
+
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PointOfInterest;
-import com.google.android.gms.tasks.Task;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.model.PlaceLikelihood;
-import com.google.android.libraries.places.api.model.RectangularBounds;
-import com.google.android.libraries.places.api.model.TypeFilter;
-import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
-import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
-import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.util.Arrays;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class SearchActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnPoiClickListener, GoogleMap.OnCameraMoveListener {
+public class SearchActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private static final int REQUEST_LOCATION_PERMISSION = 1;
-    private GoogleMap googleMap;
-    private PlacesClient placesClient;
-    private LatLng lastCameraPosition;
+    // Declare a Geocoder
+    private Geocoder geocoder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +43,16 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
         Objects.requireNonNull(getSupportActionBar()).hide();
         setContentView(R.layout.activity_search);
 
-        // Initialize Places API
-        Places.initialize(getApplicationContext(), "AIzaSyD13p8IQ-v-Qa_jYGi6JPeJ9to9jNHf0OU");
-        placesClient = Places.createClient(this);
+        // Initialize the Geocoder
+        geocoder = new Geocoder(this, Locale.getDefault());
+
+        //double[] coordinates = convertLocationToCoordinates(location);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapView);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
-        // Initialize bottom navigation view
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         bottomNavigationView.setSelectedItemId(R.id.navigation_search);
 
@@ -70,153 +64,90 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
                     finish();
                     return true;
                 } else if (item.getItemId() == R.id.navigation_search) {
-                    // Already in SearchActivity, do nothing
                     return true;
                 } else if (item.getItemId() == R.id.navigation_add) {
                     startActivity(new Intent(getApplicationContext(), AddActivity.class));
                     finish();
                     return true;
-                } else if (item.getItemId() == R.id.navigation_purchases) {
+                } else if (item.getItemId() == R.id.navigation_purchases){
                     startActivity(new Intent(getApplicationContext(), PurchasesActivity.class));
                     finish();
                     return true;
-                } else if (item.getItemId() == R.id.navigation_profile){
+                }
+                else if (item.getItemId() == R.id.navigation_profile){
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     finish();
                     return true;
                 }
                 return false;
             }
-
         });
 
-        requestLocationPermission();
+
     }
+
+    private GoogleMap googleMap;
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
-        googleMap.setOnPoiClickListener(this);
-        googleMap.setOnCameraMoveListener(this);
-        // Display current location or default location
-        displayCurrentLocation();
+
+        returnAddresses();
+        // No need to add markers here because it's already done in the convertLocationToCoordinates method
     }
 
-    private void displayCurrentLocation() {
-        // Check if location permission is granted
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // Get the user's current location
-            FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-            fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
-                LatLng userLatLng = null;
-                if (location != null) {
-                    userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 15));
-                    lastCameraPosition = userLatLng;
-                    searchNearbyPlaces(userLatLng);
-                } else {
-                    // Default location (Madrid, Spain)
-                    LatLng defaultLocation = new LatLng(40.4168, -3.7038);
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 10));
-                    Toast.makeText(this, "Unable to retrieve current location", Toast.LENGTH_SHORT).show();
-                    searchNearbyPlaces(null);
-                }
-            });
-        }
-    }
+    // Method to convert the location into coordinates
+    private void convertLocationToCoordinates(String location) {
+        try {
+            // Get the list of addresses matching the entered location
+            List<Address> addresses = geocoder.getFromLocationName(location, 1);
 
-    private void searchNearbyPlaces(LatLng location) {
-        // Define the fields to be returned for each place
-        List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
+            // Check if any addresses were found
+            if (!addresses.isEmpty()) {
+                // Get the first address
+                Address address = addresses.get(0);
 
-        // Define the search request with keywords related to farms
-        FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(placeFields);
+                // Get the coordinates of the address
+                double latitude = address.getLatitude();
+                double longitude = address.getLongitude();
 
-        // Call the Places API to find nearby farm-related places
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
-            placeResponse.addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    FindCurrentPlaceResponse response = task.getResult();
-                    if (response != null) {
-                        googleMap.clear(); // Clear existing markers
-                        for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-                            Place place = placeLikelihood.getPlace();
-                            LatLng placeLatLng = place.getLatLng();
-                            // Check if the place name or address contains farm-related keywords
-                            if (placeLatLng != null && isInBounds(placeLatLng, location, 100) && containsFarmKeywords(place)) {
-                                googleMap.addMarker(new MarkerOptions().position(placeLatLng).title(place.getName()));
-                            }
-                        }
-                    }
-                } else {
-                    Exception exception = task.getException();
-                    if (exception != null) {
-                        Toast.makeText(this, "Place search failed: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
-    }
-
-    // Method to check if a place contains farm-related keywords in its name or address
-    private boolean containsFarmKeywords(Place place) {
-        String[] farmKeywords = {"farm", "ranch", "plantation", "granja"};
-        String name = place.getName();
-        String address = place.getAddress();
-        for (String keyword : farmKeywords) {
-            if (name != null && name.toLowerCase().contains(keyword)) {
-                return true;
-            }
-            if (address != null && address.toLowerCase().contains(keyword)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isInBounds(LatLng placeLatLng, LatLng location, double radius) {
-        double latDiff = Math.abs(placeLatLng.latitude - location.latitude);
-        double lngDiff = Math.abs(placeLatLng.longitude - location.longitude);
-        return latDiff <= radius && lngDiff <= radius;
-    }
-
-
-    private void requestLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_PERMISSION);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_LOCATION_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, display current location
-                displayCurrentLocation();
+                // Use the coordinates as desired (e.g., add a marker on the map)
+                LatLng locationLatLng = new LatLng(latitude, longitude);
+                // Add a marker on the map
+                googleMap.addMarker(new MarkerOptions().position(locationLatLng).title(location));
+                // Move the camera to the marker
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationLatLng, 10));
             } else {
-                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+                // No addresses found for the entered location
+                Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT).show();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    @Override
-    public void onPoiClick(PointOfInterest poi) {
-        Toast.makeText(this, "Clicked: " + poi.name + "\nPlace ID:" + poi.placeId + "\nLatitude:" +
-                        poi.latLng.latitude + " Longitude:" + poi.latLng.longitude, Toast.LENGTH_SHORT)
-                .show();
-    }
+    public void returnAddresses() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    @Override
-    public void onCameraMove() {
-        // Check if camera position has changed significantly
-        if (lastCameraPosition == null || googleMap.getCameraPosition().target != lastCameraPosition) {
-            // Update last camera position
-            lastCameraPosition = googleMap.getCameraPosition().target;
-            // Regenerate markers for the new position
-            searchNearbyPlaces(lastCameraPosition);
-        }
+        db.collection("product")
+                .whereEqualTo("sold", false)
+                .orderBy("dateAdded", Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<HomeCardElement> data = new ArrayList<>();
+                        AtomicInteger counter = new AtomicInteger(); // Counter for Firestore calls
+                        int docCount = task.getResult().size(); // Number of documents
+
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            HomeCardElement product = document.toObject(HomeCardElement.class);
+                            convertLocationToCoordinates(product.getLocation());
+
+                        }
+                    } else {
+                        Log.e("Firestore Read Error", String.valueOf(task.getException()));
+                        // Handle the error
+                    }
+                });
     }
 }
-
