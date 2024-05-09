@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="20dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/buyCardview"
@@ -139,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginHorizontal="10dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp"
@@ -166,7 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginHorizontal="10dp"
             app:layout_constraintStart_toStartOf="@id/quantityCardView"
             app:layout_constraintBottom_toTopOf="@+id/specificationCardView">
@@ -176,7 +176,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Address"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="@id/quantityCardView"
                 app:layout_constraintTop_toBottomOf="@+id/quantityCardView"/>
 
@@ -217,7 +217,7 @@
             android:id="@+id/specificationCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginHorizontal="10dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="0dp"

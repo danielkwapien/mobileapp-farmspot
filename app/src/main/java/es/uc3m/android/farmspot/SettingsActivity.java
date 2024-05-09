@@ -46,8 +46,6 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 updateUserData();
-                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                finish();
             }
         });
     }
@@ -59,7 +57,7 @@ public class SettingsActivity extends AppCompatActivity {
         userDocRef.get()
                 .addOnSuccessListener(document -> {
                     if (document.exists()) {
-                        nameEditText.setText(document.getString("name"));
+                        nameEditText.setText(document.getString("username"));
                         addressEditText.setText(document.getString("address"));
                     }
                 })
@@ -73,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
         DocumentReference userDocRef = db.collection("users").document(userId);
 
         Map<String, Object> updates = new HashMap<>();
-        updates.put("name", nameEditText.getText().toString());
+        updates.put("username", nameEditText.getText().toString());
         updates.put("address", addressEditText.getText().toString());
 
         userDocRef.update(updates)
@@ -82,6 +80,9 @@ public class SettingsActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("userName", nameEditText.getText().toString());
                     editor.apply();
+
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    finish();
 
                     Toast.makeText(SettingsActivity.this, "Settings updated", Toast.LENGTH_SHORT).show();
                 })

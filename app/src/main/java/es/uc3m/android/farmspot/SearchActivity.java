@@ -116,7 +116,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
                 // Add a marker on the map
                 googleMap.addMarker(new MarkerOptions().position(locationLatLng).title(location));
                 // Move the camera to the marker
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationLatLng, 10));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationLatLng, 12));
             } else {
                 // No addresses found for the entered location
                 Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT).show();
