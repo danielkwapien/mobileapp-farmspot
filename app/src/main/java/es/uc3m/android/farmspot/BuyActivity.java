@@ -1,11 +1,13 @@
 package es.uc3m.android.farmspot;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -36,6 +39,7 @@ public class BuyActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         setContentView(R.layout.activity_buyproduct);
+
 
         HomeCardElement data = (HomeCardElement) getIntent().getSerializableExtra("data");
 
@@ -105,7 +109,37 @@ public class BuyActivity extends AppCompatActivity {
             }
         });
 
-
+        // Initialize bottom navigation view
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            // Handle navigation item selection
+            if (item.getItemId() == R.id.navigation_home){
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+                return true;
+            }
+            else if (item.getItemId() == R.id.navigation_search){
+                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                finish();
+                return true;
+            }
+            else if (item.getItemId() == R.id.navigation_add){
+                startActivity(new Intent(getApplicationContext(), AddActivity.class));
+                finish();
+                return true;
+            }
+            else if (item.getItemId() == R.id.navigation_favorites){
+                startActivity(new Intent(getApplicationContext(), FavoritesActivity.class));
+                finish();
+                return true;
+            }
+            else if (item.getItemId() == R.id.navigation_profile){
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                finish();
+                return true;
+            }
+            return false;
+        });
     }
 
     public void openMainActivity(){
