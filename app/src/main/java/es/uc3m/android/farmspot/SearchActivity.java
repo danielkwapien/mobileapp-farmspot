@@ -20,10 +20,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PointOfInterest;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.android.libraries.places.api.model.RectangularBounds;
 import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
@@ -35,11 +37,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class SearchActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class SearchActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnPoiClickListener, GoogleMap.OnCameraMoveListener {
 
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private GoogleMap googleMap;
     private PlacesClient placesClient;
+    private LatLng lastCameraPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +96,8 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
+        googleMap.setOnPoiClickListener(this);
+        googleMap.setOnCameraMoveListener(this);
         // Display current location or default location
         displayCurrentLocation();
     }
@@ -103,15 +108,18 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
             // Get the user's current location
             FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
             fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+                LatLng userLatLng = null;
                 if (location != null) {
-                    LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 15));
+                    lastCameraPosition = userLatLng;
                     searchNearbyPlaces(userLatLng);
                 } else {
                     // Default location (Madrid, Spain)
                     LatLng defaultLocation = new LatLng(40.4168, -3.7038);
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 10));
                     Toast.makeText(this, "Unable to retrieve current location", Toast.LENGTH_SHORT).show();
+                    searchNearbyPlaces(null);
                 }
             });
         }
@@ -121,40 +129,58 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
         // Define the fields to be returned for each place
         List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
 
-        // Define the search request
+        // Define the search request with keywords related to farms
         FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(placeFields);
 
-        // Call the Places API to find nearby places
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission.
-            return;
-        }
-        Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
-        placeResponse.addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                FindCurrentPlaceResponse response = task.getResult();
-                if (response != null) {
-                    for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-                        Place place = placeLikelihood.getPlace();
-                        LatLng placeLatLng = place.getLatLng();
-                        if (placeLatLng != null) {
-                            googleMap.addMarker(new MarkerOptions().position(placeLatLng).title(place.getName()));
+        // Call the Places API to find nearby farm-related places
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Task<FindCurrentPlaceResponse> placeResponse = placesClient.findCurrentPlace(request);
+            placeResponse.addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    FindCurrentPlaceResponse response = task.getResult();
+                    if (response != null) {
+                        googleMap.clear(); // Clear existing markers
+                        for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
+                            Place place = placeLikelihood.getPlace();
+                            LatLng placeLatLng = place.getLatLng();
+                            // Check if the place name or address contains farm-related keywords
+                            if (placeLatLng != null && isInBounds(placeLatLng, location, 100) && containsFarmKeywords(place)) {
+                                googleMap.addMarker(new MarkerOptions().position(placeLatLng).title(place.getName()));
+                            }
                         }
                     }
+                } else {
+                    Exception exception = task.getException();
+                    if (exception != null) {
+                        Toast.makeText(this, "Place search failed: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
-            } else {
-                Exception exception = task.getException();
-                if (exception != null) {
-                    Toast.makeText(this, "Place search failed: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+            });
+        }
     }
+
+    // Method to check if a place contains farm-related keywords in its name or address
+    private boolean containsFarmKeywords(Place place) {
+        String[] farmKeywords = {"farm", "ranch", "plantation", "granja"};
+        String name = place.getName();
+        String address = place.getAddress();
+        for (String keyword : farmKeywords) {
+            if (name != null && name.toLowerCase().contains(keyword)) {
+                return true;
+            }
+            if (address != null && address.toLowerCase().contains(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isInBounds(LatLng placeLatLng, LatLng location, double radius) {
+        double latDiff = Math.abs(placeLatLng.latitude - location.latitude);
+        double lngDiff = Math.abs(placeLatLng.longitude - location.longitude);
+        return latDiff <= radius && lngDiff <= radius;
+    }
+
 
     private void requestLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -172,6 +198,24 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
             } else {
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    @Override
+    public void onPoiClick(PointOfInterest poi) {
+        Toast.makeText(this, "Clicked: " + poi.name + "\nPlace ID:" + poi.placeId + "\nLatitude:" +
+                        poi.latLng.latitude + " Longitude:" + poi.latLng.longitude, Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    @Override
+    public void onCameraMove() {
+        // Check if camera position has changed significantly
+        if (lastCameraPosition == null || googleMap.getCameraPosition().target != lastCameraPosition) {
+            // Update last camera position
+            lastCameraPosition = googleMap.getCameraPosition().target;
+            // Regenerate markers for the new position
+            searchNearbyPlaces(lastCameraPosition);
         }
     }
 }
