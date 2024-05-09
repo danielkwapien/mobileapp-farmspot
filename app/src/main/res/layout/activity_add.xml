@@ -212,15 +212,16 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="0dp">
 
-            <EditText
-                android:id="@+id/unitEditText"
+            <Spinner
+                android:id="@+id/unitSpinner"
+                android:hint="@string/UnitProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:hint="@string/UnitProduct"
-                android:textColor="@android:color/black"
                 android:background="@drawable/custom_eddittext"
-                android:textSize="16sp" />
+                android:padding="8dp"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"/>
+
             <TextView
                 android:id="@+id/unitRequiredIndicator"
                 android:layout_width="wrap_content"

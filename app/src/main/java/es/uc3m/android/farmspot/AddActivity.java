@@ -78,13 +78,17 @@ public class AddActivity extends AppCompatActivity {
         EditText titleEditText = findViewById(R.id.titleAddProduct);
         EditText descriptionEditText = findViewById(R.id.descriptionEditText);
         Spinner categorySpinner = findViewById(R.id.categorySpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> adapterCategory = ArrayAdapter.createFromResource(this,
                 R.array.category_options, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner.setAdapter(adapter);
+        adapterCategory.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(adapterCategory);
 
         EditText priceEditText = findViewById(R.id.priceEditText);
-        EditText unitEditText = findViewById(R.id.unitEditText);
+        Spinner unitSpinner = findViewById(R.id.unitSpinner);
+        ArrayAdapter<CharSequence> adapterUnit = ArrayAdapter.createFromResource(this,
+                R.array.unit_options, android.R.layout.simple_spinner_item);
+        adapterUnit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        unitSpinner.setAdapter(adapterUnit);
         EditText locationEditText = findViewById(R.id.locationEditText);
         imageViewProduct = findViewById(R.id.imageViewProduct);
 
@@ -116,7 +120,7 @@ public class AddActivity extends AppCompatActivity {
                 String category = categorySpinner.getSelectedItem().toString();
 
                 String price = priceEditText.getText().toString();
-                String unit = unitEditText.getText().toString();
+                String unit = unitSpinner.getSelectedItem().toString();
                 String location = locationEditText.getText().toString();
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
