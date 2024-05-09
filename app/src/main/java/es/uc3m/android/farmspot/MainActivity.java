@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
         progressBar.setVisibility(View.VISIBLE);
 
         db.collection("product")
+                .whereEqualTo("sold", false)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
