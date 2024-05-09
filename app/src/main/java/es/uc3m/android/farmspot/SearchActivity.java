@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
+import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -82,9 +83,10 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
                     return true;
                 }
                 return false;
-                }
+            }
 
         });
+
         requestLocationPermission();
     }
 
@@ -169,10 +171,6 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
                 displayCurrentLocation();
             } else {
                 Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
-                // Permission denied, go back to MainActivity
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                finish();
             }
         }
     }
