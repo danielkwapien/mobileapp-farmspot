@@ -76,7 +76,7 @@ public class SearchActivity extends AppCompatActivity implements OnMapReadyCallb
                     startActivity(new Intent(getApplicationContext(), AddActivity.class));
                     finish();
                     return true;
-                } else if (item.getItemId() == R.id.navigation_favorites) {
+                } else if (item.getItemId() == R.id.navigation_purchases) {
                     startActivity(new Intent(getApplicationContext(), PurchasesActivity.class));
                     finish();
                     return true;

@@ -1,5 +1,6 @@
 package es.uc3m.android.farmspot;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -42,6 +44,41 @@ public class PurchasesActivity extends AppCompatActivity implements ItemListener
         progressBar = findViewById(R.id.progressBar);
 
         fetchPurchase();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_purchases);
+
+        // Set listener for bottom navigation view item selection
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                // Handle navigation item selection
+                if (item.getItemId() == R.id.navigation_home){
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                    return true;
+                }
+                else if (item.getItemId() == R.id.navigation_search){
+                    startActivity(new Intent(getApplicationContext(), SearchActivity.class));
+                    finish();
+                    return true;
+                }
+                else if (item.getItemId() == R.id.navigation_add){
+                    startActivity(new Intent(getApplicationContext(), AddActivity.class));
+                    finish();
+                    return true;
+                }
+                else if (item.getItemId() == R.id.navigation_purchases){
+                    return true;
+                }
+                else if (item.getItemId() == R.id.navigation_profile){
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                    finish();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override

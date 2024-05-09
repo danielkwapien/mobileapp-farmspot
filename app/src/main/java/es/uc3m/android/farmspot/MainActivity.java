@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements ItemListener {
                     finish();
                     return true;
                 }
-                else if (item.getItemId() == R.id.navigation_favorites){
+                else if (item.getItemId() == R.id.navigation_purchases){
                     startActivity(new Intent(getApplicationContext(), PurchasesActivity.class));
                     finish();
                     return true;
