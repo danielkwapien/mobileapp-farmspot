@@ -31,6 +31,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -146,6 +147,7 @@ public class AddActivity extends AppCompatActivity {
                 product.put("userId", userId);
                 product.put("location", location);
                 product.put("sold", false);
+                product.put("dateAdded", FieldValue.serverTimestamp());
 
                 if (imageUri != null) {
                     // Create a reference to the image
