@@ -49,12 +49,12 @@ public class CombinedActivityTests {
     @Test
     public void testNavigationToFavoritesActivity() {
         // Click on the favorites button in the bottom navigation bar
-        Espresso.onView(withId(R.id.navigation_favorites))
+        Espresso.onView(withId(R.id.navigation_purchases))
                 .perform(ViewActions.click());
 
         // Verify that FavoritesActivity is opened
-        Espresso.onView(ViewMatchers.withId(R.id.navigation_favorites))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+        Espresso.onView(withId(R.id.navigation_purchases)
+                .clone(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 
     @Test
